@@ -1,27 +1,111 @@
-/**
- * Um item só deve ser marcado como "publicado" depois de confirmar autorização,
- * anonimização, imagem segura e dados descritivos.
- *
- * Campos por item:
- * slug, titulo, categoria, descricao, imagem, alt, localGenerico, ano,
- * escopo, status e anonimizado.
+/** Cases reais dos portfólios de 2026 fornecidos pelo usuário.
+ * Imagens de apresentação sem dados pessoais; conclusão do projeto não implica obra executada.
  */
-export const portfolio = [];
+const image = (project, file, legenda, tipo = "Visualização do projeto") => ({
+  src: `/assets/portfolio/${project}/${file}.webp`, alt: legenda, legenda, tipo,
+});
+
+export const portfolio = [
+  {
+    slug: "tre-ac-interiores",
+    titulo: "TRE-AC · Interiores do 4º andar",
+    categoria: "Institucional e corporativo",
+    descricao: "Arquitetura de interiores em BIM para integrar capacitação, trabalho e bem-estar, com documentação executiva, acessibilidade e quantitativos.",
+    imagem: "/assets/portfolio/tre-ac-interiores/modelo-interiores.webp",
+    alt: "Modelo tridimensional dos interiores do quarto andar do TRE-AC",
+    localGenerico: "Rio Branco · AC", ano: 2026,
+    escopo: "Arquitetura, interiores e documentação BIM",
+    disciplinas: ["Arquitetura", "Interiores", "Modelagem BIM", "Quantitativos"],
+    filtros: ["arquitetura"],
+    servicos: ["arquitetonico", "interiores", "modelagem-bim", "visualizacao-3d", "planejamento-orcamentos"],
+    desafio: "Organizar o quarto andar para receber ambientes de capacitação, auditório, cafeteria e espaços de bem-estar, articulando os usos e a circulação do pavimento.",
+    solucao: "Modelagem das condições existentes e desenvolvimento da arquitetura em camadas construtivas. O estudo inclui layout, comunicação visual, sinalização de acessibilidade e perspectivas para avaliação dos ambientes.",
+    entregaveis: ["Modelo arquitetônico BIM das condições existentes e da proposta", "Layouts e documentação executiva de arquitetura e interiores", "Sinalização de acessibilidade e detalhamento em Braille", "Listas de materiais para apoio ao orçamento", "Planta humanizada e perspectivas dos ambientes"],
+    galeria: [image("tre-ac-interiores", "modelo-interiores", "Visão geral do modelo de interiores do pavimento", "Modelo BIM"), image("tre-ac-interiores", "planta-humanizada", "Planta de apresentação com a setorização dos ambientes", "Planta humanizada"), image("tre-ac-interiores", "setorizacao-3d", "Perspectiva da distribuição dos espaços de capacitação, apoio e bem-estar", "Perspectiva 3D"), image("tre-ac-interiores", "acessibilidade", "Estudo de circulação e piso tátil na área de convivência"), image("tre-ac-interiores", "cafeteria", "Visualização da cafeteria e de sua integração com os ambientes")],
+    destaque: true, status: "publicado", anonimizado: true,
+  },
+  {
+    slug: "celesc",
+    titulo: "Celesc · Complexo administrativo e operacional",
+    categoria: "Institucional e corporativo",
+    descricao: "Projeto arquitetônico executivo em BIM para um complexo com núcleo administrativo, auditório e pavilhão operacional em Santa Catarina.",
+    imagem: "/assets/portfolio/celesc/implantacao-3d.webp",
+    alt: "Perspectiva do modelo de implantação do complexo da Celesc",
+    localGenerico: "Santa Catarina · SC", ano: 2026,
+    escopo: "Arquitetura executiva e modelagem BIM",
+    disciplinas: ["Arquitetura", "Implantação", "Modelagem BIM", "Quantitativos"],
+    filtros: ["arquitetura"],
+    servicos: ["arquitetonico", "modelagem-bim", "visualizacao-3d", "planejamento-orcamentos"],
+    desafio: "Articular as atividades administrativas, de capacitação e de suporte logístico em um mesmo complexo, considerando a implantação, os acessos e a organização funcional.",
+    solucao: "Desenvolvimento do projeto arquitetônico executivo a partir do levantamento das condições existentes. A modelagem em camadas construtivas apoia a documentação, a representação das fachadas e a extração de quantitativos.",
+    entregaveis: ["Modelo BIM de arquitetura e implantação", "Projeto arquitetônico executivo com plantas e fachadas", "Organização do núcleo administrativo, auditório e pavilhão operacional", "Listas de materiais para apoio à orçamentação", "Perspectivas de apresentação do complexo"],
+    galeria: [image("celesc", "implantacao-3d", "Implantação geral do complexo administrativo e operacional", "Modelo BIM"), image("celesc", "modelo-implantacao", "Vista tridimensional da implantação, acessos e áreas externas", "Modelo BIM"), image("celesc", "planta-humanizada", "Planta de apresentação com os setores administrativo, de capacitação e operacional", "Planta humanizada"), image("celesc", "fachada", "Perspectiva externa do pavilhão e de seus acessos"), image("celesc", "auditorio", "Estudo de interiores do auditório para capacitação")],
+    destaque: true, status: "publicado", anonimizado: true,
+  },
+  {
+    slug: "museu-tre-ac",
+    titulo: "Museu do TRE-AC",
+    categoria: "Cultural e expografia",
+    descricao: "Arquitetura e interiores em BIM para um percurso expositivo definido por divisórias curvas, núcleos de exposição e espaços de apoio.",
+    imagem: "/assets/portfolio/museu-tre-ac/modelo-expografico.webp",
+    alt: "Modelo tridimensional do percurso expositivo do Museu do TRE-AC",
+    localGenerico: "Rio Branco · AC", ano: 2026,
+    escopo: "Arquitetura, interiores e elementos expográficos",
+    disciplinas: ["Arquitetura", "Interiores", "Expografia", "Modelagem BIM"],
+    filtros: ["arquitetura"],
+    servicos: ["arquitetonico", "interiores", "modelagem-bim", "visualizacao-3d", "planejamento-orcamentos"],
+    desafio: "Adaptar o espaço existente para conduzir o visitante por uma narrativa museológica, organizando o percurso, os núcleos expositivos e os ambientes de apoio.",
+    solucao: "Modelagem da arquitetura e dos elementos expográficos, incluindo divisórias curvas, a partir do levantamento arquitetônico. Plantas e perspectivas permitem avaliar a ocupação e a relação entre os ambientes.",
+    entregaveis: ["Modelagem BIM das condições existentes e da proposta", "Projeto de arquitetura e interiores com elementos expográficos", "Pranchas técnicas executivas", "Mapas de materiais para apoio ao orçamento", "Planta humanizada e perspectivas do percurso museológico"],
+    galeria: [image("museu-tre-ac", "modelo-expografico", "Visão geral do percurso expositivo e dos ambientes de apoio", "Modelo BIM"), image("museu-tre-ac", "planta-humanizada", "Planta de apresentação com a distribuição dos núcleos expositivos", "Planta humanizada"), image("museu-tre-ac", "perspectiva-3d", "Perspectiva das divisórias curvas e da organização do museu", "Perspectiva 3D"), image("museu-tre-ac", "sala-apoio", "Visualização de um dos espaços de apoio ao museu"), image("museu-tre-ac", "percurso-expositivo", "Detalhe do percurso e dos núcleos de exposição")],
+    destaque: false, status: "publicado", anonimizado: true,
+  },
+  {
+    slug: "mercado-publico-domingos-mourao",
+    titulo: "Mercado Público de Domingos Mourão",
+    categoria: "Comercial e serviços",
+    descricao: "Projetos executivos elétrico e hidrossanitário coordenados em BIM, com detalhamento das redes e extração de materiais para orçamento.",
+    imagem: "/assets/portfolio/mercado-domingos-mourao/modelo-instalacoes.webp",
+    alt: "Modelo das instalações do Mercado Público de Domingos Mourão",
+    localGenerico: "Domingos Mourão · PI", ano: 2026,
+    escopo: "Instalações elétricas e hidrossanitárias em BIM",
+    disciplinas: ["Elétrica", "Hidrossanitário", "Compatibilização BIM", "Quantitativos"],
+    filtros: ["instalacoes", "compatibilizacao"],
+    servicos: ["eletrico", "hidrossanitario", "compatibilizacao", "modelagem-bim", "planejamento-orcamentos"],
+    desafio: "Coordenar as redes de água, esgoto e energia dos boxes e sanitários coletivos com a arquitetura, a estrutura e a cobertura do mercado.",
+    solucao: "Dimensionamento e modelagem tridimensional das instalações, com coordenação espacial dos traçados. O desenvolvimento inclui reservação superior, redes de distribuição, esgotamento, eletrodutos e quadros de proteção.",
+    entregaveis: ["Projetos executivos elétrico e hidrossanitário", "Modelos BIM das redes, conexões e componentes", "Compatibilização das instalações com arquitetura e estrutura", "Detalhes isométricos de reservação e instalações", "Listas de materiais para apoio ao orçamento"],
+    galeria: [image("mercado-domingos-mourao", "modelo-instalacoes", "Visão geral das redes prediais e de sua relação com a estrutura", "Modelo BIM"), image("mercado-domingos-mourao", "compatibilizacao-mep", "Coordenação das redes hidrossanitárias e elétricas", "Compatibilização BIM"), image("mercado-domingos-mourao", "detalhe-hidraulico", "Amostra do detalhamento dos ramais de alimentação hidráulica", "Detalhe de apresentação"), image("mercado-domingos-mourao", "quadro-eletrico", "Detalhamento tridimensional de um quadro de proteção elétrica", "Detalhe de apresentação")],
+    destaque: true, status: "publicado", anonimizado: true,
+  },
+  {
+    slug: "igreja-batista-maanaim",
+    titulo: "Igreja Batista Maanaim",
+    categoria: "Religioso e coletivo",
+    descricao: "Estrutura de concreto armado integrada à cobertura metálica e às instalações elétricas e hidrossanitárias por meio de modelos BIM.",
+    imagem: "/assets/portfolio/igreja-maanaim/modelo-estrutural.webp",
+    alt: "Modelo tridimensional da estrutura da Igreja Batista Maanaim",
+    localGenerico: "Timon · MA", ano: 2026,
+    escopo: "Estrutura, instalações e compatibilização BIM",
+    disciplinas: ["Estruturas", "Elétrica", "Hidrossanitário", "Compatibilização BIM"],
+    filtros: ["estruturas", "instalacoes", "compatibilizacao"],
+    servicos: ["estrutural", "eletrico", "hidrossanitario", "compatibilizacao", "modelagem-bim", "planejamento-orcamentos"],
+    desafio: "Desenvolver a estrutura e as instalações de uma edificação com nave central, mezanino e níveis escalonados, coordenando a interface entre concreto armado e cobertura metálica.",
+    solucao: "Cálculo estrutural, dimensionamento das instalações e modelagem da infraestrutura e superestrutura. O modelo federado permite analisar passagens e interferências entre elementos estruturais e redes prediais.",
+    entregaveis: ["Projeto estrutural com fundações, pilares, vigas e lajes", "Modelagem da estrutura mista e da cobertura metálica", "Projetos elétrico e hidrossanitário", "Compatibilização das disciplinas em modelo federado", "Plantas de formas, cortes e detalhamentos executivos", "Mapas de materiais para apoio ao orçamento"],
+    galeria: [image("igreja-maanaim", "modelo-estrutural", "Visão geral do modelo estrutural e dos níveis da edificação", "Modelo BIM"), image("igreja-maanaim", "planta-formas", "Amostra da planta de formas e da organização estrutural", "Planta de apresentação"), image("igreja-maanaim", "corte-estrutural", "Corte de apresentação com os níveis e a interface da cobertura", "Corte de apresentação"), image("igreja-maanaim", "estrutura-3d", "Perspectiva da estrutura de concreto e da cobertura metálica", "Modelo BIM"), image("igreja-maanaim", "compatibilizacao", "Modelo federado com estrutura e instalações prediais", "Compatibilização BIM"), image("igreja-maanaim", "perspectiva-externa", "Visualização externa da estrutura apresentada no portfólio")],
+    destaque: false, status: "publicado", anonimizado: true,
+  },
+];
 
 export const publishedPortfolio = portfolio.filter(
-  (item) =>
-    item.status === "publicado" && item.imagem && item.anonimizado === true,
+  (item) => item.status === "publicado" && item.imagem && item.anonimizado === true,
 );
 
-export const portfolioCategories = [
-  "Projetos residenciais",
-  "Projetos comerciais",
-  "Renders 3D",
-  "Projetos técnicos",
-  "Urbanização",
-  "Drenagem",
-  "Instalações",
-  "Laudos e vistorias",
-  "Fiscalização de obras",
-  "Engenharia sanitária e ambiental",
+export const portfolioFilters = [
+  { value: "", label: "Todos os projetos" },
+  { value: "arquitetura", label: "Arquitetura e interiores" },
+  { value: "estruturas", label: "Estruturas" },
+  { value: "instalacoes", label: "Instalações" },
+  { value: "compatibilizacao", label: "Compatibilização BIM" },
 ];

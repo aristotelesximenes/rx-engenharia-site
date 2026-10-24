@@ -73,3 +73,17 @@ Gerador estático em Node.js, sem dependências externas, com dados em `src/data
 - validação ampliada para exigir correspondência entre imagens e legendas, ambientes e diretórios públicos permitidos;
 - 19 páginas HTML verificadas, sem documentos técnicos sensíveis na saída;
 - catálogo e página individual revisados visualmente em desktop e celular, sem rolagem horizontal.
+
+## Evolução de desenvolvimento — 24/10/2026
+
+- dois portfólios de apresentação fornecidos pelo usuário revisados: a versão original de 25 páginas e a versão 2026 v2 de 30 páginas;
+- cinco cases reais cadastrados, com escopo atribuído à RX conforme os documentos: interiores TRE-AC, Celesc, Museu TRE-AC, Mercado Público de Domingos Mourão e Igreja Batista Maanaim;
+- 25 imagens extraídas e selecionadas para apresentação comercial, em WebP, com cerca de 1,9 MB no total;
+- páginas individuais de cases incluídas no gerador e no sitemap, com validação das galerias e dos serviços relacionados;
+- página de portfólio com filtros de arquitetura/interiores, estruturas, instalações e compatibilização BIM;
+- especialidades organizadas em quatro grupos: arquitetura e espaços; estruturas e instalações; BIM e planejamento; infraestrutura e projetos sob medida;
+- serviços de interiores, modelagem/documentação BIM, visualização 3D e quantitativos/planejamento/orçamento acrescentados a partir do escopo documentado;
+- referências a cases reais incluídas na home e nas especialidades correspondentes;
+- nomes de instituições mantidos conforme autorização do usuário; registros profissionais, endereços precisos e documentos integrais não foram incorporados;
+- descrições preservam a distinção entre projeto desenvolvido e obra executada.
+- geração de 24 páginas HTML validada; cinco filtros do portfólio, cinco galerias e 13 especialidades testados em navegador, nas larguras de 1440 e 390 pixels, sem erros de execução ou rolagem lateral.

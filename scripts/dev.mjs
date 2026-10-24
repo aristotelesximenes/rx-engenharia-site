@@ -2,6 +2,7 @@ import { createReadStream, existsSync, statSync } from "node:fs";
 import http from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { siteConfig } from "../src/data/site-config.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dist = path.join(root, "dist");
@@ -17,10 +18,15 @@ const mime = {
   ".png": "image/png",
   ".txt": "text/plain; charset=utf-8",
   ".webmanifest": "application/manifest+json; charset=utf-8",
+  ".webp": "image/webp",
 };
 
 const server = http.createServer((request, response) => {
-  const urlPath = decodeURIComponent(new URL(request.url, `http://${request.headers.host}`).pathname);
+  let urlPath = decodeURIComponent(new URL(request.url, `http://${request.headers.host}`).pathname);
+  const base = siteConfig.basePath.replace(/\/$/, "");
+  if (base && (urlPath === base || urlPath.startsWith(`${base}/`))) {
+    urlPath = urlPath.slice(base.length) || "/";
+  }
   let filePath = path.join(dist, urlPath);
 
   if (existsSync(filePath) && statSync(filePath).isDirectory()) {
@@ -43,5 +49,5 @@ const server = http.createServer((request, response) => {
 });
 
 server.listen(port, "127.0.0.1", () => {
-  console.log(`RX Engenharia: http://127.0.0.1:${port}`);
+  console.log(`RX Engenharia: http://127.0.0.1:${port}${siteConfig.basePath}/`);
 });

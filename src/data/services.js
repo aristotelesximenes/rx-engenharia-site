@@ -1,8 +1,40 @@
 export const projectServices = [
   {
+    slug: "interiores", nome: "Projeto de interiores", categoria: "Arquitetura e espaços",
+    descricaoCurta: "Layouts, mobiliário e circulação para ambientes corporativos, institucionais, comerciais e residenciais.",
+    descricaoCompleta: "Desenvolvimento dos espaços internos com estudo de layout, organização dos usos, materiais e detalhamentos, integrado à arquitetura e às instalações contratadas.",
+    entregaveis: ["Layouts e estudos de organização dos ambientes", "Detalhamentos e especificações conforme escopo", "Perspectivas para avaliação das soluções"],
+    quandoContratar: "Ao implantar, reformar ou reorganizar ambientes e espaços de atendimento, trabalho, convivência ou exposição.",
+    cta: "Solicitar projeto de interiores", mensagemWhatsApp: "interiores", icon: "compass",
+  },
+  {
+    slug: "modelagem-bim", nome: "Modelagem e documentação BIM", categoria: "BIM e planejamento",
+    descricaoCurta: "Modelos digitais com informações construtivas para desenvolver, documentar e coordenar o projeto.",
+    descricaoCompleta: "Modelagem das condições existentes e das soluções de projeto, com componentes e camadas construtivas organizados para a finalidade e o nível de desenvolvimento contratados.",
+    entregaveis: ["Modelos BIM das disciplinas contratadas", "Plantas, cortes, vistas e detalhes extraídos do modelo", "Organização das informações e componentes construtivos"],
+    quandoContratar: "No desenvolvimento de projetos novos, reformas ou documentação de edificações existentes a partir de um levantamento disponível.",
+    cta: "Solicitar modelagem BIM", mensagemWhatsApp: "bim", icon: "layers",
+  },
+  {
+    slug: "visualizacao-3d", nome: "Visualização 3D e construção virtual", categoria: "Arquitetura e espaços",
+    descricaoCurta: "Plantas humanizadas, perspectivas e vistas tridimensionais para compreender o projeto antes da obra.",
+    descricaoCompleta: "Representação espacial da arquitetura, estrutura e instalações para apresentar alternativas, avaliar a ocupação e comunicar soluções ao cliente e à equipe de execução.",
+    entregaveis: ["Plantas humanizadas e vistas de apresentação", "Perspectivas e renderizações conforme escopo", "Visualizações técnicas de modelos e componentes"],
+    quandoContratar: "Ao avaliar uma solução, apresentar um empreendimento ou comunicar decisões de projeto antes da execução.",
+    cta: "Solicitar visualização 3D", mensagemWhatsApp: "visualizacao", icon: "pencil",
+  },
+  {
+    slug: "planejamento-orcamentos", nome: "Quantitativos, planejamento e orçamento", categoria: "BIM e planejamento",
+    descricaoCurta: "Informações de projeto organizadas para planejar compras, custos e etapas de execução.",
+    descricaoCompleta: "Extração e organização de quantitativos a partir dos modelos BIM, apoio à orçamentação e elaboração de planejamento físico-financeiro conforme o escopo contratado e as informações disponíveis.",
+    entregaveis: ["Listas e mapas de materiais extraídos do modelo", "Levantamento de quantitativos por disciplina", "Orçamento e cronograma físico-financeiro quando contratados"],
+    quandoContratar: "Antes das compras e da obra, ou quando é necessário revisar quantidades, estimar custos e organizar as etapas de execução.",
+    cta: "Solicitar planejamento e orçamento", mensagemWhatsApp: "planejamento", icon: "document",
+  },
+  {
     slug: "arquitetonico",
     nome: "Projeto arquitetônico",
-    categoria: "projetos",
+    categoria: "Arquitetura e espaços",
     descricaoCurta:
       "Organização dos espaços, fluxos, fachadas e soluções construtivas conforme terreno, programa e legislação aplicável.",
     descricaoCompleta:
@@ -21,7 +53,7 @@ export const projectServices = [
   {
     slug: "estrutural",
     nome: "Projeto estrutural",
-    categoria: "projetos",
+    categoria: "Estruturas e instalações",
     descricaoCurta:
       "Definição e detalhamento dos elementos estruturais com base nas condições e informações técnicas disponíveis.",
     descricaoCompleta:
@@ -40,7 +72,7 @@ export const projectServices = [
   {
     slug: "eletrico",
     nome: "Projeto elétrico de baixa tensão",
-    categoria: "instalacoes",
+    categoria: "Estruturas e instalações",
     descricaoCurta:
       "Distribuição de pontos, circuitos, quadros e cargas para instalações residenciais e comerciais de baixa tensão.",
     descricaoCompleta:
@@ -59,7 +91,7 @@ export const projectServices = [
   {
     slug: "luminotecnico",
     nome: "Projeto luminotécnico",
-    categoria: "instalacoes",
+    categoria: "Estruturas e instalações",
     descricaoCurta:
       "Planejamento dos pontos e efeitos de iluminação considerando uso, conforto e integração com a arquitetura.",
     descricaoCompleta:
@@ -78,7 +110,7 @@ export const projectServices = [
   {
     slug: "hidrossanitario",
     nome: "Projeto hidrossanitário",
-    categoria: "instalacoes",
+    categoria: "Estruturas e instalações",
     descricaoCurta:
       "Distribuição de água, coleta de esgoto e soluções sanitárias compatibilizadas com arquitetura e estrutura.",
     descricaoCompleta:
@@ -97,7 +129,7 @@ export const projectServices = [
   {
     slug: "drenagem",
     nome: "Projeto de drenagem",
-    categoria: "sanitaria-ambiental",
+    categoria: "Infraestrutura e soluções sob medida",
     descricaoCurta:
       "Soluções para captação, condução e manejo de águas pluviais em lotes, edificações e áreas urbanizadas.",
     descricaoCompleta:
@@ -116,7 +148,7 @@ export const projectServices = [
   {
     slug: "urbanizacao",
     nome: "Projeto de urbanização",
-    categoria: "urbanismo",
+    categoria: "Infraestrutura e soluções sob medida",
     descricaoCurta:
       "Organização técnica de vias, áreas, infraestrutura e espaços de uso coletivo conforme o contexto do empreendimento.",
     descricaoCompleta:
@@ -135,7 +167,7 @@ export const projectServices = [
   {
     slug: "compatibilizacao",
     nome: "Compatibilização de projetos",
-    categoria: "coordenacao",
+    categoria: "BIM e planejamento",
     descricaoCurta:
       "Análise conjunta das disciplinas para identificar interferências e organizar informações antes da execução.",
     descricaoCompleta:
@@ -154,7 +186,7 @@ export const projectServices = [
   {
     slug: "personalizado",
     nome: "Projeto personalizado",
-    categoria: "projetos",
+    categoria: "Infraestrutura e soluções sob medida",
     descricaoCurta:
       "Solução desenvolvida a partir do terreno, programa de necessidades, orçamento e exigências técnicas da demanda.",
     descricaoCompleta:
@@ -172,12 +204,27 @@ export const projectServices = [
   },
 ];
 
+export const projectServiceGroups = [
+  { slug: "arquitetura-espacos", indice: "01", nome: "Arquitetura, interiores e visualização", descricao: "Da implantação ao ambiente interno: espaços organizados para o uso e apresentados com clareza.", servicos: ["arquitetonico", "interiores", "visualizacao-3d"] },
+  { slug: "estruturas-instalacoes", indice: "02", nome: "Estruturas e instalações prediais", descricao: "Sistemas estruturais e redes prediais desenvolvidos de forma coordenada com a arquitetura.", servicos: ["estrutural", "eletrico", "hidrossanitario", "luminotecnico"] },
+  { slug: "bim-planejamento", indice: "03", nome: "BIM, compatibilização e planejamento", descricao: "Modelos digitais, documentação e quantitativos que apoiam as decisões antes da obra.", servicos: ["modelagem-bim", "compatibilizacao", "planejamento-orcamentos"] },
+  { slug: "infraestrutura-sob-medida", indice: "04", nome: "Infraestrutura e projetos sob medida", descricao: "Soluções para o terreno, as áreas externas e as necessidades específicas de cada empreendimento.", servicos: ["drenagem", "urbanizacao", "personalizado"] },
+];
+
+export const bimProcess = [
+  { indice: "01", titulo: "Levantamento", texto: "Organização dos dados e modelagem das condições existentes." },
+  { indice: "02", titulo: "Desenvolvimento", texto: "Arquitetura, estrutura e instalações conforme as disciplinas contratadas." },
+  { indice: "03", titulo: "Compatibilização", texto: "Análise das interfaces e interferências entre os modelos." },
+  { indice: "04", titulo: "Documentação", texto: "Plantas, cortes e detalhes organizados a partir do modelo." },
+  { indice: "05", titulo: "Quantitativos", texto: "Listas de materiais para apoiar orçamento e planejamento." },
+];
+
 export const serviceGroups = [
   {
     slug: "projetos-tecnicos",
-    nome: "Projetos técnicos",
+    nome: "Projetos integrados em BIM",
     descricao:
-      "Arquitetura e projetos complementares organizados para reduzir improvisos e dar clareza à execução.",
+      "Arquitetura, interiores, estruturas e instalações com modelagem, compatibilização e documentação técnica.",
     href: "/projetos-tecnicos/",
     cta: "Solicitar projeto técnico",
     mensagemWhatsApp: "projetoTecnico",

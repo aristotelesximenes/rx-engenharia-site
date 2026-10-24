@@ -2,10 +2,11 @@ import { access, cp, mkdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { Layout } from "../src/components/index.js";
-import { portfolio } from "../src/data/portfolio.js";
+import { portfolio, publishedPortfolio } from "../src/data/portfolio.js";
+import { projectServices } from "../src/data/services.js";
 import { projects, publishedProjects } from "../src/data/projects.js";
 import { siteConfig } from "../src/data/site-config.js";
-import { pages, projectDetailPage } from "../src/pages/pages.js";
+import { pages, projectDetailPage, portfolioDetailPage } from "../src/pages/pages.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dist = path.join(root, "dist");
@@ -107,6 +108,12 @@ for (const item of portfolio.filter((entry) => entry.status === "publicado")) {
   if (!item.descricao) missing.push("descricao");
   if (!item.imagem) missing.push("imagem");
   if (!item.escopo) missing.push("escopo");
+  for (const field of ["alt", "localGenerico", "ano", "desafio", "solucao"]) {
+    if (!item[field]) missing.push(field);
+  }
+  for (const field of ["disciplinas", "filtros", "servicos", "entregaveis", "galeria"]) {
+    if (!item[field]?.length) missing.push(field);
+  }
   if (item.anonimizado !== true) missing.push("anonimizado: true");
   if (missing.length) {
     throw new Error(
@@ -117,6 +124,17 @@ for (const item of portfolio.filter((entry) => entry.status === "publicado")) {
     throw new Error(`Imagem de portfólio fora da pasta pública permitida: ${item.imagem}`);
   }
   await access(path.join(root, "public", item.imagem.replace(/^\//, "")));
+  for (const service of item.servicos) {
+    if (!projectServices.some((entry) => entry.slug === service)) {
+      throw new Error(`Serviço desconhecido no portfólio ${item.slug}: ${service}`);
+    }
+  }
+  for (const image of item.galeria) {
+    if (!/^\/assets\/portfolio\/.+\.(avif|jpe?g|png|webp)$/i.test(image.src) || !image.alt || !image.legenda || !image.tipo) {
+      throw new Error(`Imagem de portfólio incompleta ou fora do diretório permitido: ${item.slug}`);
+    }
+    await access(path.join(root, "public", image.src.replace(/^\//, "")));
+  }
 }
 
 for (const page of pages) {
@@ -125,6 +143,10 @@ for (const page of pages) {
 
 for (const project of publishedProjects) {
   await writeRoute(`/projetos-prontos/${project.slug}/`, projectDetailPage(project));
+}
+
+for (const item of publishedPortfolio) {
+  await writeRoute(`/portfolio/${item.slug}/`, portfolioDetailPage(item));
 }
 
 const notFound = Layout({
@@ -145,6 +167,7 @@ if (siteConfig.siteUrl) {
   const routes = [
     ...pages.map((page) => page.path),
     ...publishedProjects.map((project) => `/projetos-prontos/${project.slug}/`),
+    ...publishedPortfolio.map((item) => `/portfolio/${item.slug}/`),
   ];
   const baseUrl = siteConfig.siteUrl.replace(/\/$/, "");
   const basePath = siteConfig.basePath.replace(/\/$/, "");
@@ -170,4 +193,4 @@ await writeFile(
   "utf8",
 );
 
-console.log(`Build concluído: ${pages.length + publishedProjects.length} páginas em ${dist}`);
+console.log(`Build concluído: ${pages.length + publishedProjects.length + publishedPortfolio.length} páginas em ${dist}`);

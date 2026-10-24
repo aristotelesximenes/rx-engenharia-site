@@ -190,18 +190,19 @@ export function ServiceCard(service) {
   </article>`;
 }
 
-export function TechnicalService(service) {
+export function TechnicalService(service, examples = []) {
   const message = whatsappMessages[service.mensagemWhatsApp] || whatsappMessages.geral;
   return `<article class="technical-service" id="${service.slug}">
     <div class="technical-service-heading">
       <div class="card-icon">${icon(service.icon)}</div>
-      <div><span class="card-kicker">${service.categoria}</span><h2>${service.nome}</h2></div>
+      <div><span class="card-kicker">${service.categoria}</span><h3>${service.nome}</h3></div>
     </div>
     <p class="lead-small">${service.descricaoCompleta}</p>
     <div class="technical-columns">
-      <div><h3>Quando contratar</h3><p>${service.quandoContratar}</p></div>
-      <div><h3>Principais entregáveis</h3>${CheckList(service.entregaveis)}</div>
+      <div><h4>Quando contratar</h4><p>${service.quandoContratar}</p></div>
+      <div><h4>Principais entregáveis</h4>${CheckList(service.entregaveis)}</div>
     </div>
+    ${examples.length ? `<div class="service-evidence"><span>Experiência neste serviço</span>${examples.slice(0, 2).map((item) => `<a href="${withBase(`/portfolio/${item.slug}/`)}">${escapeHtml(item.titulo)} ${icon("arrow", "icon icon-sm")}</a>`).join("")}</div>` : ""}
     <a class="button button-secondary" href="${whatsappUrl(message)}" target="_blank" rel="noopener">${icon("whatsapp")} ${service.cta}</a>
   </article>`;
 }
@@ -280,6 +281,20 @@ export function EmptyState({ title, text, label, message }) {
     <div><span class="eyebrow">Em curadoria</span><h2>${title}</h2><p>${text}</p></div>
     <a class="button button-primary" href="${whatsappUrl(message)}" target="_blank" rel="noopener">${icon("whatsapp")} ${label}</a>
   </div>`;
+}
+
+export function PortfolioCard(item, heading = "h2") {
+  const href = withBase(`/portfolio/${item.slug}/`);
+  return `<article class="portfolio-card" data-portfolio-card data-disciplines="${escapeHtml(item.filtros.join(" "))}">
+    <a class="portfolio-image" href="${href}" aria-label="Ver projeto: ${escapeHtml(item.titulo)}"><img src="${withBase(item.imagem)}" alt="${escapeHtml(item.alt)}" loading="lazy" width="1200" height="800"><span class="portfolio-image-label">Projeto desenvolvido · ${item.ano}</span></a>
+    <div class="portfolio-card-body"><span class="card-kicker">${escapeHtml(item.categoria)}</span><${heading}><a href="${href}">${escapeHtml(item.titulo)}</a></${heading}><p>${escapeHtml(item.descricao)}</p>
+    <ul class="discipline-tags" aria-label="Disciplinas do projeto">${item.disciplinas.map((tag) => `<li>${escapeHtml(tag)}</li>`).join("")}</ul>
+    <div class="portfolio-card-footer"><span>${icon("pin", "icon icon-sm")}${escapeHtml(item.localGenerico)}</span><a class="text-link" href="${href}">Ver projeto ${icon("arrow", "icon icon-sm")}</a></div></div>
+  </article>`;
+}
+
+export function BimWorkflow(steps) {
+  return `<section class="section section-dark"><div class="container">${SectionTitle({ eyebrow: "Como trabalhamos em BIM", title: "Do levantamento à informação para a obra", text: "As disciplinas e as entregas são combinadas conforme a necessidade de cada projeto." })}<ol class="bim-process">${steps.map((step) => `<li><span>${step.indice}</span><h3>${step.titulo}</h3><p>${step.texto}</p></li>`).join("")}</ol></div></section>`;
 }
 
 export function ProjectCard(project) {

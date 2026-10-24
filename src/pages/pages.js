@@ -1,4 +1,5 @@
 import {
+  BimWorkflow,
   CheckList,
   CtaSection,
   EmptyState,
@@ -8,6 +9,7 @@ import {
   Layout,
   PageHeader,
   PolicyNotice,
+  PortfolioCard,
   ProjectCard,
   ProjectFilters,
   SectionTitle,
@@ -22,18 +24,20 @@ import {
   homeDifferentiators,
   homeProcess,
 } from "../data/home.js";
-import { portfolioCategories, publishedPortfolio } from "../data/portfolio.js";
+import { portfolioFilters, publishedPortfolio } from "../data/portfolio.js";
 import { readyProjectNotice, readyProjectPolicies } from "../data/policies.js";
 import { publishedProjects } from "../data/projects.js";
 import {
   projectServices,
+  projectServiceGroups,
+  bimProcess,
   serviceGroups,
   servicePages,
 } from "../data/services.js";
 import { siteConfig, withBase } from "../data/site-config.js";
 import { team } from "../data/team.js";
 import { whatsappMessages } from "../data/whatsapp-messages.js";
-import { icon, whatsappUrl } from "../lib/html.js";
+import { escapeHtml, icon, whatsappUrl } from "../lib/html.js";
 
 function homePage() {
   const serviceCards = serviceGroups.map(ServiceCard).join("");
@@ -45,9 +49,9 @@ function homePage() {
     <section class="hero technical-grid">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <span class="eyebrow">Engenharia civil • Sanitária • Ambiental</span>
+          <span class="eyebrow">Projetos integrados em BIM</span>
           <h1>Engenharia técnica, projetos e consultoria para obras, imóveis e empreendimentos.</h1>
-          <p>A RX atua com projetos técnicos, laudos, vistorias, fiscalização, gerenciamento, instalações e soluções sanitárias e ambientais em demandas residenciais, comerciais, urbanas e institucionais.</p>
+          <p>Arquitetura, interiores, estruturas e instalações conectadas por modelos BIM. A RX desenvolve projetos para clientes residenciais, comerciais e institucionais e atua com consultoria, laudos e acompanhamento de obras.</p>
           <div class="hero-actions">
             <a class="button button-primary" href="${withBase("/projetos-tecnicos/")}">Ver serviços ${icon("arrow", "icon icon-sm")}</a>
             <a class="button button-ghost" href="${withBase("/projetos-prontos/")}">Projetos prontos</a>
@@ -65,6 +69,8 @@ function homePage() {
       </div>
       <div class="container hero-index" aria-hidden="true"><span>Precisão</span><span>Clareza</span><span>Responsabilidade técnica</span></div>
     </section>
+
+    <section class="section section-muted home-portfolio"><div class="container"><div class="featured-projects-heading">${SectionTitle({ eyebrow: "Portfólio real", title: "Projetos desenvolvidos. Experiência que você pode conhecer.", text: "Conheça a atuação da RX em diferentes regiões, escalas e disciplinas — dos ambientes institucionais à coordenação de instalações." })}<a class="button button-secondary" href="${withBase("/portfolio/")}">Explorar portfólio ${icon("arrow", "icon icon-sm")}</a></div><div class="portfolio-grid portfolio-grid-featured">${publishedPortfolio.filter((item) => item.destaque).slice(0, 3).map((item) => PortfolioCard(item, "h3")).join("")}</div></div></section>
 
     <section class="section" id="servicos">
       <div class="container">
@@ -132,15 +138,17 @@ function homePage() {
 
 function technicalProjectsPage() {
   const content = `
-    ${PageHeader({ eyebrow: "Projetos", title: "Projetos técnicos para obras residenciais, comerciais, urbanas e institucionais", text: "Desenvolvimento de projetos arquitetônicos e complementares com suporte em engenharia civil, engenharia sanitária e ambiental e parceria técnica em Arquitetura." })}
+    ${PageHeader({ eyebrow: "Especialidades da RX", title: "Arquitetura e engenharia conectadas em BIM", text: "Projetos arquitetônicos, de interiores, estruturais e de instalações, com modelagem, compatibilização e informações para planejar a obra." })}
     <section class="section"><div class="container intro-grid"><div><span class="eyebrow">Base para executar</span><h2>Informação técnica antes da obra</h2></div><p>Projetos bem definidos reduzem improvisos, ajudam a compatibilizar disciplinas e tornam o escopo de execução mais claro. Cada contratação é estruturada conforme os dados disponíveis e a finalidade do cliente.</p></div></section>
-    <section class="section section-muted"><div class="container technical-services-list">${projectServices.map(TechnicalService).join("")}</div></section>
+    <section class="section section-muted"><div class="container">${SectionTitle({ eyebrow: "O que elaboramos", title: "Encontre o tipo de projeto para sua demanda", text: "Contrate uma disciplina ou um conjunto integrado. Os exemplos de cada especialidade levam a projetos reais do nosso portfólio." })}<nav class="specialty-nav" aria-label="Especialidades de projeto">${projectServiceGroups.map((group) => `<a href="#${group.slug}"><span>${group.indice}</span><strong>${group.nome}</strong>${icon("arrow", "icon icon-sm")}</a>`).join("")}</nav></div></section>
+    ${projectServiceGroups.map((group) => `<section class="section specialty-section" id="${group.slug}"><div class="container"><div class="specialty-heading"><span class="specialty-number">${group.indice}</span><div><h2>${group.nome}</h2><p>${group.descricao}</p></div></div><div class="technical-services-list">${group.servicos.map((slug) => projectServices.find((service) => service.slug === slug)).map((service) => TechnicalService(service, publishedPortfolio.filter((item) => item.servicos.includes(service.slug)))).join("")}</div></div></section>`).join("")}
+    ${BimWorkflow(bimProcess)}
     ${CtaSection({ title: "Precisa combinar mais de uma disciplina?", text: "A RX pode avaliar arquitetura, estrutura, instalações, drenagem e compatibilização em um escopo integrado.", label: "Solicitar projeto técnico", message: whatsappMessages.projetoTecnico, secondary: { label: "Projetos personalizados", href: "/projetos-personalizados/" } })}
   `;
   return Layout({
     title: "Projetos técnicos de engenharia",
     description:
-      "Projetos arquitetônicos, estruturais, elétricos de baixa tensão, hidrossanitários, drenagem, urbanização e luminotécnicos.",
+      "Arquitetura, interiores, estruturas, instalações, modelagem e compatibilização BIM, quantitativos, planejamento e orçamento. Veja cases reais da RX.",
     path: "/projetos-tecnicos/",
     content,
   });
@@ -237,21 +245,31 @@ function serviceLanding({
 }
 
 function portfolioPage() {
-  const items = publishedPortfolio.length
-    ? `<div class="portfolio-grid">${publishedPortfolio.map((item) => `<article class="portfolio-card"><img src="${withBase(item.imagem)}" alt="${item.alt}" loading="lazy"><div><span class="card-kicker">${item.categoria}</span><h2>${item.titulo}</h2><p>${item.descricao}</p><dl><div><dt>Local</dt><dd>${item.localGenerico || "Não informado"}</dd></div><div><dt>Escopo</dt><dd>${item.escopo}</dd></div></dl></div></article>`).join("")}</div>`
-    : EmptyState({
-        title: "Portfólio público em revisão",
-        text: "O acervo técnico existe, mas imagens e descrições só serão publicadas após validação de autorização, anonimização e ausência de informações sensíveis.",
-        label: "Conhecer os serviços",
-        message: whatsappMessages.geral,
-      });
   const content = `
-    ${PageHeader({ eyebrow: "Acervo selecionado", title: "Portfólio técnico da RX", text: "Projetos e serviços serão apresentados por meio de resumos e imagens autorizadas, sem exposição de documentos, dados pessoais ou arquivos técnicos completos." })}
-    <section class="section"><div class="container"><div class="category-cloud">${portfolioCategories.map((category) => `<span>${category}</span>`).join("")}</div>${items}</div></section>
-    <section class="section section-muted"><div class="container privacy-panel">${icon("document")}<div><span class="eyebrow">Proteção do acervo</span><h2>Portfólio mostra capacidade, não documentos de cliente.</h2><p>Contratos, ARTs, plantas completas, relatórios, endereços e arquivos editáveis permanecem fora da área pública.</p></div></div></section>
-    ${CtaSection({ title: "Quer entender a experiência aplicável ao seu caso?", text: "Converse diretamente com a equipe e descreva o tipo de demanda.", label: "Falar sobre meu projeto", message: whatsappMessages.geral })}
+    ${PageHeader({ eyebrow: "Projetos reais · Portfólio 2026", title: "Da concepção ao detalhe. Conheça o trabalho da RX.", text: "Projetos desenvolvidos para clientes de diferentes setores: arquitetura, interiores, estruturas e instalações com documentação e coordenação em BIM." })}
+    <section class="section"><div class="container"><div class="portfolio-intro"><div><span class="eyebrow">Experiência aplicada</span><h2>Diferentes usos. A mesma atenção a cada disciplina.</h2></div><p>Explore os modelos, as plantas e as perspectivas de cada trabalho. Em cada case, apresentamos o contexto, o escopo desenvolvido e as entregas da RX.</p></div>
+    <div class="portfolio-filter-bar"><div class="portfolio-filters" role="group" aria-label="Filtrar portfólio por especialidade">${portfolioFilters.map((filter) => `<button type="button" data-portfolio-filter="${filter.value}" aria-pressed="${filter.value === ""}">${filter.label}</button>`).join("")}</div><p class="portfolio-count" data-portfolio-count aria-live="polite">${publishedPortfolio.length} projetos</p></div>
+    <div class="portfolio-grid" id="portfolio-results">${publishedPortfolio.map((item) => PortfolioCard(item)).join("")}</div></div></section>
+    ${BimWorkflow(bimProcess)}
+    ${CtaSection({ title: "O próximo projeto pode ser o seu.", text: "Conte o uso da edificação, a cidade e a etapa em que você está. A RX organiza as disciplinas e os entregáveis necessários para a sua demanda.", label: "Conversar sobre meu projeto", message: whatsappMessages.projetoTecnico, secondary: { label: "Conhecer as especialidades", href: "/projetos-tecnicos/" } })}
   `;
-  return Layout({ title: "Portfólio técnico", description: "Portfólio selecionado de projetos, vistorias, fiscalização, instalações e engenharia sanitária e ambiental da RX.", path: "/portfolio/", content });
+  return Layout({ title: "Portfólio de projetos reais em BIM", description: "Conheça os projetos da RX para TRE-AC, Celesc, Museu do TRE-AC, Mercado Público de Domingos Mourão e Igreja Batista Maanaim.", path: "/portfolio/", content, image: publishedPortfolio[0]?.imagem });
+}
+
+export function portfolioDetailPage(item) {
+  const message = `Olá, conheci o projeto ${item.titulo} no portfólio da RX e gostaria de conversar sobre uma demanda semelhante.`;
+  const services = item.servicos.map((slug) => projectServices.find((service) => service.slug === slug));
+  const related = publishedPortfolio.filter((other) => other.slug !== item.slug).slice(0, 3);
+  const content = `
+    ${PageHeader({ eyebrow: item.categoria, title: item.titulo, text: item.descricao, breadcrumbs: [{ label: "Portfólio", href: "/portfolio/" }] })}
+    <section class="section case-section"><div class="container"><dl class="case-meta"><div><dt>Localização</dt><dd>${item.localGenerico}</dd></div><div><dt>Ano do projeto</dt><dd>${item.ano}</dd></div><div><dt>Escopo desenvolvido pela RX</dt><dd>${item.escopo}</dd></div></dl>
+    <div class="case-layout"><div><div class="case-gallery">${item.galeria.map((photo, index) => `<figure${index === 0 ? ' class="case-gallery-cover"' : ""}><a href="${withBase(photo.src)}" target="_blank" rel="noopener" aria-label="Ampliar: ${escapeHtml(photo.legenda)}"><img src="${withBase(photo.src)}" alt="${escapeHtml(photo.alt)}" ${index ? 'loading="lazy"' : 'fetchpriority="high"'}></a><figcaption><span>${photo.tipo}</span>${photo.legenda}</figcaption></figure>`).join("")}</div><p class="case-gallery-note">Imagens de apresentação do projeto. Toque em uma imagem para ampliar.</p></div>
+    <aside class="case-summary"><span class="eyebrow">Atuação da RX</span><h2>Disciplinas que se conectam.</h2><ul class="discipline-tags">${item.disciplinas.map((label) => `<li>${label}</li>`).join("")}</ul><p>Conheça os serviços relacionados a este case:</p><ul class="case-service-links">${services.map((service) => `<li><a href="${withBase(`/projetos-tecnicos/#${service.slug}`)}">${service.nome}${icon("arrow", "icon icon-sm")}</a></li>`).join("")}</ul><a class="button button-primary button-block" href="${whatsappUrl(message)}" target="_blank" rel="noopener">${icon("whatsapp")} Conversar sobre meu projeto</a></aside></div></div></section>
+    <section class="section section-muted"><div class="container case-story"><div><span class="eyebrow">Contexto do projeto</span><h2>O desafio</h2><p>${item.desafio}</p><h2>A solução desenvolvida</h2><p>${item.solucao}</p></div><div class="case-deliverables"><span class="eyebrow">Escopo do case</span><h2>O que a RX desenvolveu</h2>${CheckList(item.entregaveis)}</div></div></section>
+    <section class="section"><div class="container">${SectionTitle({ eyebrow: "Outros trabalhos", title: "Mais projetos do portfólio" })}<div class="portfolio-grid portfolio-grid-featured">${related.map((other) => PortfolioCard(other, "h3")).join("")}</div></div></section>
+    ${CtaSection({ title: "Vamos desenvolver uma solução para sua demanda?", text: "Cada projeto começa pelas condições reais do cliente. Apresente o objetivo, o local e as disciplinas de que precisa.", label: "Solicitar proposta", message, secondary: { label: "Voltar ao portfólio", href: "/portfolio/" } })}
+  `;
+  return Layout({ title: item.titulo, description: item.descricao, path: `/portfolio/${item.slug}/`, image: item.imagem, content });
 }
 
 function aboutPage() {

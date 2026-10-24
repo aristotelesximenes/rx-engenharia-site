@@ -3,6 +3,10 @@ export const whatsappMessages = {
     "Olá, vim pelo site da RX Engenharia e Projetos e gostaria de atendimento.",
   projetoTecnico:
     "Olá, preciso de um projeto técnico. Gostaria de informar o tipo de projeto, cidade e características da demanda.",
+  interiores: "Olá, tenho interesse em um projeto de interiores. Gostaria de apresentar os ambientes e as necessidades de uso.",
+  bim: "Olá, preciso de modelagem e documentação BIM. Gostaria de explicar as disciplinas e as informações disponíveis.",
+  visualizacao: "Olá, preciso de visualização 3D para um projeto. Gostaria de conversar sobre plantas humanizadas e perspectivas.",
+  planejamento: "Olá, preciso de quantitativos, planejamento ou orçamento de obra. Gostaria de apresentar a demanda.",
   projetoPronto:
     "Olá, tenho interesse no projeto [NOME DO PROJETO] disponível no site da RX. Gostaria de saber valores, arquivos inclusos e possibilidade de adaptação.",
   projetoPersonalizado:

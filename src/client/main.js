@@ -76,6 +76,23 @@ if (filterForm) {
 
 const contactForm = document.querySelector("[data-contact-form]");
 
+const portfolioFilters = [...document.querySelectorAll("[data-portfolio-filter]")];
+const portfolioCards = [...document.querySelectorAll("[data-portfolio-card]")];
+const portfolioCount = document.querySelector("[data-portfolio-count]");
+for (const button of portfolioFilters) {
+  button.addEventListener("click", () => {
+    const specialty = button.dataset.portfolioFilter;
+    let visible = 0;
+    for (const card of portfolioCards) {
+      const matches = !specialty || card.dataset.disciplines.split(" ").includes(specialty);
+      card.hidden = !matches;
+      if (matches) visible += 1;
+    }
+    portfolioFilters.forEach((filter) => filter.setAttribute("aria-pressed", String(filter === button)));
+    if (portfolioCount) portfolioCount.textContent = `${visible} ${visible === 1 ? "projeto" : "projetos"}`;
+  });
+}
+
 if (contactForm) {
   const requestedService = new URLSearchParams(window.location.search).get("servico");
   const serviceSelect = contactForm.querySelector('[name="servico"]');

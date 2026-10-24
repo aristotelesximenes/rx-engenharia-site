@@ -80,6 +80,8 @@ Para criar uma nova mensagem:
 Edite `src/data/services.js`.
 
 - `projectServices`: cards detalhados da página de projetos técnicos;
+- `projectServiceGroups`: quatro grupos comerciais de especialidades, com os slugs dos serviços na ordem de apresentação;
+- `bimProcess`: etapas do trabalho em BIM apresentadas no portfólio e na página de projetos;
 - `serviceGroups`: frentes exibidas na home;
 - `servicePages`: conteúdo, escopo, preparação do primeiro contato e SEO das páginas de serviços técnicos;
 - listas finais: conteúdo das páginas de consultoria, laudos, fiscalização, ambiental e instalações.
@@ -114,10 +116,14 @@ Nunca coloque DWG, DOCX, PDF técnico integral, planilhas, memoriais ou pacotes 
 
 Edite `src/data/portfolio.js` e use a estrutura indicada no comentário do arquivo.
 
+O portfólio reúne cinco cases reais fornecidos pelo responsável pela RX: TRE-AC (interiores do 4º andar), Celesc, Museu do TRE-AC, Mercado Público de Domingos Mourão e Igreja Batista Maanaim. Cada case gera uma página em `/portfolio/[slug]/`, com galeria, contexto, solução, entregáveis e links para as especialidades relacionadas.
+
+Além de título, categoria, descrição, ano e localização, mantenha `disciplinas`, `filtros`, `servicos`, `desafio`, `solucao`, `entregaveis` e `galeria`. Cada entrada da galeria usa `src`, `alt`, `legenda` e `tipo`. Os valores de `servicos` precisam corresponder a slugs de `projectServices`; os valores de `filtros` correspondem às opções de `portfolioFilters`. Use `destaque: true` para apresentar o case na home.
+
 Antes de publicar, confirme:
 
 - autorização de uso da imagem;
-- remoção de nomes, endereços, placas, coordenadas e números de documentos;
+- remoção de dados pessoais, endereços precisos, placas, coordenadas e números de documentos; nomes de instituições e projetos podem ser usados quando autorizados;
 - descrição sem cliente identificável, quando necessário;
 - `anonimizado: true` quando o item tiver sido tratado;
 - imagem segura dentro de `public/assets/portfolio/`.
@@ -125,6 +131,8 @@ Antes de publicar, confirme:
 Itens em rascunho, sem imagem ou sem `anonimizado: true` não aparecem no site. O build também interrompe a publicação se um item marcado como `publicado` estiver sem campos obrigatórios ou sem anonimização confirmada.
 
 As imagens autorizadas do portfólio devem ficar exclusivamente em `public/assets/portfolio/`.
+
+As 25 imagens iniciais são versões WebP selecionadas dos PDFs de apresentação, somando aproximadamente 1,9 MB. Os PDFs originais e os arquivos executivos não fazem parte do repositório público. Descreva as representações como modelos, plantas ou perspectivas e não infira execução ou conclusão da obra a partir delas.
 
 ## Equipe
 
