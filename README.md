@@ -1,6 +1,6 @@
 # Site RX Engenharia e Projetos
 
-Site institucional e comercial estático e responsivo. O build usa apenas Node.js e gera arquivos prontos para Cloudflare Pages, Vercel ou GitHub Pages. O assistente opcional de WhatsApp é um serviço separado, em `automation/whatsapp/`, e não é hospedado pelo GitHub Pages.
+Site institucional e comercial estático e responsivo. O build usa apenas Node.js e gera arquivos para GitHub Pages ou Locaweb. O assistente opcional de WhatsApp é um serviço separado, em `automation/whatsapp/`, e não faz parte dos arquivos públicos.
 
 ## Rodar localmente
 
@@ -17,6 +17,7 @@ Outros comandos:
 ```bash
 npm run build   # gera dist/
 npm run check   # build + valida páginas, links e ausência de arquivos sensíveis
+npm run build:locaweb # valida e gera dist-locaweb/ na raiz do domínio registrado
 ```
 
 Não é necessário executar `npm install`: o projeto não usa dependências externas.
@@ -38,6 +39,12 @@ site-rx/
 ```
 
 Os textos de público, processo e diferenciais da página inicial ficam em `src/data/home.js`. Assim, a home pode evoluir sem misturar conteúdo comercial com o template HTML.
+
+## Identidade visual atual
+
+A interface editorial usa superfícies claras, neutros naturais, acentos laranja RX e projetos reais. `src/styles/site.css` mantém a base de componentes; `src/styles/modern.css`, carregado depois, define a identidade atual e seus ajustes responsivos. A fonte variável Manrope é hospedada localmente em `public/assets/fonts/`, acompanhada da licença SIL OFL.
+
+`homeShowcase` define os três projetos selecionáveis da primeira tela; `homeFocusAreas` organiza as quatro áreas de atuação. A seleção é manual, com botões acessíveis e sem rotação automática. O conteúdo mantém a distinção entre projeto elaborado e obra executada.
 
 ## Configuração principal
 
@@ -171,6 +178,12 @@ O formulário de contato não armazena dados e não depende de backend. Ao envia
 As páginas técnicas podem abrir o formulário com o serviço pré-selecionado usando `?servico=Nome%20do%20serviço`. O valor precisa coincidir exatamente com uma opção do campo `servico`; valores desconhecidos são ignorados.
 
 ## Deploy
+
+### Locaweb — domínio registrado
+
+O responsável confirmou `rxprojetosbim.eng.br` e Hospedagem GO Linux. Execute `npm run build:locaweb` e publique somente o conteúdo de `dist-locaweb/` na pasta `public_html`. Essa saída usa URLs na raiz do domínio, canonical e sitemap próprios, sem alterar a prévia GitHub. O gerador inclui `.htaccess` para index, 404, MIME e proteção contra listagem de diretórios. O workflow GitHub não sincroniza a Locaweb automaticamente.
+
+Confira [o procedimento de publicação](docs/DOMINIO.md). Não registre senhas ou credenciais no repositório, em pacotes ou na documentação. DNS e HTTPS devem ser conferidos antes de redirecionamentos definitivos.
 
 ### GitHub Pages
 

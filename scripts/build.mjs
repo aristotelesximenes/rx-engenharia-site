@@ -5,11 +5,14 @@ import { Layout } from "../src/components/index.js";
 import { portfolio, publishedPortfolio } from "../src/data/portfolio.js";
 import { projectServices } from "../src/data/services.js";
 import { projects, publishedProjects } from "../src/data/projects.js";
-import { siteConfig } from "../src/data/site-config.js";
+import { siteConfig, outputDirectory, deploymentTarget } from "../src/data/site-config.js";
 import { pages, projectDetailPage, portfolioDetailPage } from "../src/pages/pages.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const dist = path.join(root, "dist");
+const dist = path.join(root, outputDirectory);
+if (path.dirname(dist) !== root || !["dist", "dist-locaweb"].includes(path.basename(dist))) {
+  throw new Error("Diretório de saída fora do projeto.");
+}
 
 async function writeRoute(route, html) {
   const routePath = route === "/" ? "" : route.replace(/^\//, "").replace(/\/$/, "");
@@ -23,7 +26,21 @@ await mkdir(path.join(dist, "assets"), { recursive: true });
 
 await cp(path.join(root, "public"), dist, { recursive: true });
 await cp(path.join(root, "src", "styles", "site.css"), path.join(dist, "assets", "site.css"));
+await cp(path.join(root, "src", "styles", "modern.css"), path.join(dist, "assets", "modern.css"));
 await cp(path.join(root, "src", "client", "main.js"), path.join(dist, "assets", "main.js"));
+
+if (deploymentTarget === "locaweb") {
+  await writeFile(path.join(dist, ".htaccess"), [
+    "DirectoryIndex index.html",
+    "Options -Indexes",
+    "ErrorDocument 404 /404.html",
+    "<IfModule mod_mime.c>",
+    "  AddType font/ttf .ttf",
+    "  AddType image/webp .webp",
+    "</IfModule>",
+    "",
+  ].join("\n"), "utf8");
+}
 
 function duplicateValues(items, field) {
   const values = items.map((item) => item[field]).filter(Boolean);
@@ -183,8 +200,8 @@ await writeFile(
       short_name: siteConfig.shortName,
       start_url: siteConfig.basePath || "/",
       display: "standalone",
-      background_color: "#090a0b",
-      theme_color: "#090a0b",
+      background_color: "#f6f7f3",
+      theme_color: "#f6f7f3",
       icons: [],
     },
     null,

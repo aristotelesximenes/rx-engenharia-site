@@ -126,14 +126,16 @@ export function Layout({
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#090a0b">
+  <meta name="theme-color" content="#f6f7f3">
   ${metaTags({ title, description, path, image })}
   ${jsonLd(businessSchema)}
+  <link rel="preload" href="${withBase("/assets/fonts/Manrope-Variable.ttf")}" as="font" type="font/ttf" crossorigin>
   <link rel="icon" href="${withBase(siteConfig.logo)}">
   <link rel="stylesheet" href="${withBase("/assets/site.css")}">
+  <link rel="stylesheet" href="${withBase("/assets/modern.css")}">
   <script type="module" src="${withBase("/assets/main.js")}" defer></script>
 </head>
-<body class="${bodyClass}" data-page="${escapeHtml(path)}" data-whatsapp="${siteConfig.whatsappNumber}" data-whatsapp-allowed="${siteConfig.whatsappContacts.map((contact) => contact.number).join(" ")}">
+<body class="modern-site ${bodyClass}" data-page="${escapeHtml(path)}" data-whatsapp="${siteConfig.whatsappNumber}" data-whatsapp-allowed="${siteConfig.whatsappContacts.map((contact) => contact.number).join(" ")}">
   ${Header(path)}
   <main id="conteudo">${content}</main>
   ${Footer()}

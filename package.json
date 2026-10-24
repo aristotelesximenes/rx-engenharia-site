@@ -6,6 +6,7 @@
   "description": "Site institucional estático da RX Engenharia e Projetos.",
   "scripts": {
     "build": "node scripts/build.mjs",
+    "build:locaweb": "node scripts/build-locaweb.mjs",
     "dev": "node scripts/build.mjs && node scripts/dev.mjs",
     "check": "node scripts/check.mjs",
     "bot:test": "node --test automation/whatsapp/bot.test.mjs",

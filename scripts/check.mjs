@@ -2,10 +2,10 @@ import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { siteConfig } from "../src/data/site-config.js";
+import { siteConfig, outputDirectory } from "../src/data/site-config.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const dist = path.join(root, "dist");
+const dist = path.join(root, outputDirectory);
 
 const build = spawnSync(process.execPath, [path.join(root, "scripts", "build.mjs")], {
   cwd: root,

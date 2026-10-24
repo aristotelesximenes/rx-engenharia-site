@@ -1,4 +1,6 @@
 dist/
+dist-locaweb/
+release/
 node_modules/
 .DS_Store
 Thumbs.db

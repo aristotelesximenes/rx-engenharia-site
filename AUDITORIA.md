@@ -97,3 +97,15 @@ Gerador estático em Node.js, sem dependências externas, com dados em `src/data
 - assistente de WhatsApp implementado em serviço separado, com dois canais, menu de serviços, coleta de solicitação e pausa para equipe;
 - 12 testes locais do assistente aprovados, incluindo verificação do webhook, deduplicação, separação entre números e falha de envio;
 - ativação real do assistente pendente: ambos os números usam Business, mas o responsável informou ainda não ter acesso administrativo à conta empresarial da Meta; hospedagem e credenciais também precisam ser configuradas.
+
+## Renovação visual e preparação Locaweb — 24/10/2026
+
+- página inicial recomposta em linguagem editorial: projetos reais na primeira tela, seleção manual de arquitetura/interiores/estruturas, especialidades, processo BIM, catálogo e diretores;
+- tipografia Manrope variável hospedada localmente, com licença SIL OFL, superfícies claras, cartões e navegação renovados também nas páginas internas;
+- imagens e escopos reais preservados, sem reintroduzir campanha do Dia do Trabalhador, preços não comprovados ou identificação dos diretores como sócios;
+- vitrine manual e filtros do portfólio conferidos no navegador: contagens 5, 3, 1, 2 e 2; home revista visualmente em computador e celular;
+- builds independentes: `dist/` para a prévia GitHub e `dist-locaweb/` com URLs na raiz do domínio, sem dependências nem dados do robô;
+- registro do domínio confirmado pelo usuário; hospedagem GO Linux conferida como Ativo no painel;
+- DNS público conferido: domínio raiz apontando ao mesmo IP exibido na hospedagem e `www` apontando ao domínio raiz; nenhum registro DNS foi alterado;
+- HTTPS responde, mas a raiz ainda retorna 403 antes da publicação dos arquivos; isso não foi tratado como site publicado;
+- WebFTP acessível, com autenticação pendente do responsável. Credenciais não foram salvas no código ou no pacote.

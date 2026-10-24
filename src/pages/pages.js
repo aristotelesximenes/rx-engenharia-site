@@ -13,16 +13,14 @@ import {
   ProjectCard,
   ProjectFilters,
   SectionTitle,
-  ServiceCard,
   TeamCard,
   TechnicalService,
   TechnicalSheet,
 } from "../components/index.js";
 import { generalFaq, readyProjectsFaq } from "../data/faq.js";
 import {
-  homeAudiences,
-  homeDifferentiators,
-  homeProcess,
+  homeShowcase,
+  homeFocusAreas,
 } from "../data/home.js";
 import { portfolioFilters, publishedPortfolio } from "../data/portfolio.js";
 import { readyProjectNotice, readyProjectPolicies } from "../data/policies.js";
@@ -31,7 +29,6 @@ import {
   projectServices,
   projectServiceGroups,
   bimProcess,
-  serviceGroups,
   servicePages,
 } from "../data/services.js";
 import { siteConfig, withBase } from "../data/site-config.js";
@@ -40,100 +37,44 @@ import { whatsappMessages } from "../data/whatsapp-messages.js";
 import { escapeHtml, icon, whatsappUrl } from "../lib/html.js";
 
 function homePage() {
-  const serviceCards = serviceGroups.map(ServiceCard).join("");
-  const featuredProjects = publishedProjects
-    .filter((project) => project.destaque)
-    .slice(0, 3);
-
+  const hero = homeShowcase[0];
+  const featured = ["celesc", "museu-tre-ac", "igreja-batista-maanaim"].map((slug) => publishedPortfolio.find((item) => item.slug === slug)).filter(Boolean);
+  const ready = publishedProjects.filter((project) => project.destaque).slice(0, 3);
+  const directors = team.filter((member) => member.publicar && member.tipoVinculo !== "parceria técnica");
   const content = `
-    <section class="hero technical-grid">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <span class="eyebrow">Projetos integrados em BIM</span>
-          <h1>Engenharia técnica, projetos e consultoria para obras, imóveis e empreendimentos.</h1>
-          <p>Arquitetura, interiores, estruturas e instalações conectadas por modelos BIM. A RX desenvolve projetos para clientes residenciais, comerciais e institucionais e atua com consultoria, laudos e acompanhamento de obras.</p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="${withBase("/projetos-tecnicos/")}">Ver serviços ${icon("arrow", "icon icon-sm")}</a>
-            <a class="button button-ghost" href="${withBase("/projetos-prontos/")}">Projetos prontos</a>
-            <a class="text-link hero-whatsapp" href="${whatsappUrl(whatsappMessages.geral)}" target="_blank" rel="noopener">${icon("whatsapp")} Falar pelo WhatsApp</a>
-          </div>
+    <section class="studio-hero" aria-labelledby="home-title">
+      <div class="container studio-hero-grid">
+        <div class="studio-hero-copy">
+          <span class="studio-kicker"><i aria-hidden="true"></i> Projetos integrados em BIM</span>
+          <h1 id="home-title">Arquitetura<br>e engenharia.<br><span>Em sintonia.</span></h1>
+          <p>Da primeira ideia ao detalhe construtivo. Conectamos espaços, estruturas e instalações para planejar melhor cada etapa da sua obra.</p>
+          <div class="studio-hero-actions"><a class="button button-primary" href="${withBase("/portfolio/")}">Conheça nossos projetos ${icon("arrow", "icon icon-sm")}</a><a class="studio-secondary-link" href="${withBase("/projetos-tecnicos/")}">O que fazemos ${icon("arrow", "icon icon-sm")}</a></div>
+          <div class="studio-hero-note">${icon("layers")}<p><strong>Uma visão integrada do seu projeto.</strong><span>Modelagem, compatibilização e informação para executar.</span></p></div>
         </div>
-        <div class="hero-visual" aria-label="Painel institucional da RX Engenharia e Projetos">
-          <div class="hero-visual-top"><span>RX / TEC</span><span>${siteConfig.city.replace("/", " • ").toUpperCase()}</span></div>
-          <div class="hero-logo-wrap"><img src="${withBase(siteConfig.logo)}" alt="RX Engenharia e Projetos" width="500" height="333"></div>
-          <div class="hero-lines" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-          <div class="hero-visual-bottom">
-            <span>Projetos</span><span>Laudos</span><span>Fiscalização</span><span>Consultoria</span>
-          </div>
+        <div class="studio-showcase" data-showcase>
+          <div class="showcase-topline"><span>Em foco · Portfólio RX</span><span data-showcase-counter>01 / 03</span></div>
+          <div class="showcase-image-wrap"><img data-showcase-image src="${withBase(hero.imagem)}" alt="${escapeHtml(hero.alt)}" width="1100" height="900" fetchpriority="high"></div>
+          <a class="showcase-caption" data-showcase-link href="${withBase(`/portfolio/${hero.slug}/`)}"><div><span data-showcase-location>${hero.local}</span><h2 data-showcase-title>${hero.titulo}</h2></div><span class="showcase-open">${icon("arrow")}</span></a>
+          <div class="showcase-controls" role="group" aria-label="Explorar projetos em destaque">${homeShowcase.map((item, index) => `<button type="button" data-showcase-select data-image="${withBase(item.imagem)}" data-alt="${escapeHtml(item.alt)}" data-title="${escapeHtml(item.titulo)}" data-location="${escapeHtml(item.local)}" data-href="${withBase(`/portfolio/${item.slug}/`)}" data-index="${index + 1}" aria-pressed="${index === 0 ? "true" : "false"}"><span>0${index + 1}</span>${item.categoria}</button>`).join("")}</div>
         </div>
       </div>
-      <div class="container hero-index" aria-hidden="true"><span>Precisão</span><span>Clareza</span><span>Responsabilidade técnica</span></div>
+      <div class="container studio-disciplines"><span>Uma equipe.<br><strong>Múltiplas perspectivas.</strong></span><p>Arquitetura</p><i aria-hidden="true">+</i><p>Estruturas</p><i aria-hidden="true">+</i><p>Instalações</p><i aria-hidden="true">+</i><p>Compatibilização BIM</p></div>
     </section>
 
-    <section class="section section-muted home-portfolio"><div class="container"><div class="featured-projects-heading">${SectionTitle({ eyebrow: "Portfólio real", title: "Projetos desenvolvidos. Experiência que você pode conhecer.", text: "Conheça a atuação da RX em diferentes regiões, escalas e disciplinas — dos ambientes institucionais à coordenação de instalações." })}<a class="button button-secondary" href="${withBase("/portfolio/")}">Explorar portfólio ${icon("arrow", "icon icon-sm")}</a></div><div class="portfolio-grid portfolio-grid-featured">${publishedPortfolio.filter((item) => item.destaque).slice(0, 3).map((item) => PortfolioCard(item, "h3")).join("")}</div></div></section>
+    <section class="section home-portfolio" id="projetos"><div class="container"><div class="featured-projects-heading">${SectionTitle({ eyebrow: "Projetos selecionados", title: "Cada projeto, uma resposta ao seu contexto.", text: "Trabalhos reais da RX em arquitetura, interiores e engenharia. Conheça as soluções e o escopo desenvolvido em cada case." })}<a class="studio-secondary-link" href="${withBase("/portfolio/")}">Ver portfólio completo ${icon("arrow", "icon icon-sm")}</a></div><div class="portfolio-grid portfolio-grid-featured">${featured.map((item) => PortfolioCard(item, "h3")).join("")}</div></div></section>
 
-    <section class="section" id="servicos">
-      <div class="container">
-        ${SectionTitle({ eyebrow: "Frentes de atuação", title: "Engenharia aplicada à decisão e à execução", text: "Do estudo inicial ao acompanhamento de obra, a RX organiza soluções técnicas conforme a necessidade e o escopo de cada demanda." })}
-        <div class="service-grid">${serviceCards}</div>
-      </div>
-    </section>
+    <section class="section home-expertise" id="servicos"><div class="container"><div class="expertise-intro">${SectionTitle({ eyebrow: "O que fazemos", title: "Da concepção ao projeto que orienta a obra.", text: "Uma disciplina ou um conjunto integrado. O escopo é definido a partir das condições reais e das prioridades de cada cliente." })}<a class="button button-secondary" href="${withBase("/projetos-tecnicos/")}">Todas as especialidades ${icon("arrow", "icon icon-sm")}</a></div><div class="expertise-grid">${homeFocusAreas.map((area) => `<a class="expertise-card" href="${withBase(area.href)}"><div class="expertise-card-top"><span>${area.numero}</span>${icon(area.icon)}</div><h3>${area.titulo}</h3><p>${area.texto}</p><span class="expertise-card-link">Explorar especialidade ${icon("arrow", "icon icon-sm")}</span></a>`).join("")}</div><div class="support-services"><span>Também acompanhamos as suas decisões.</span><a href="${withBase("/laudos-e-vistorias/")}">Laudos e vistorias ${icon("arrow", "icon icon-sm")}</a><a href="${withBase("/fiscalizacao-e-gerenciamento/")}">Fiscalização de obras ${icon("arrow", "icon icon-sm")}</a><a href="${withBase("/engenharia-consultiva/")}">Consultoria técnica ${icon("arrow", "icon icon-sm")}</a></div></div></section>
 
-    <section class="section section-muted" id="publicos">
-      <div class="container">
-        ${SectionTitle({ eyebrow: "Para quem atuamos", title: "Engenharia adequada ao contexto de cada cliente", text: "O atendimento começa pela finalidade da demanda — não por um pacote genérico. A RX estrutura o serviço conforme o imóvel, a obra, o empreendimento ou a organização." })}
-        <div class="audience-grid">${homeAudiences.map((audience) => `<article class="audience-card"><span>${audience.index}</span><h3>${audience.title}</h3><p>${audience.description}</p><a class="text-link" href="${withBase(audience.href)}">${audience.linkLabel} ${icon("arrow", "icon icon-sm")}</a></article>`).join("")}</div>
-      </div>
-    </section>
+    <section class="section section-dark home-method" id="bim"><div class="container method-layout"><div class="method-visual"><div class="method-visual-label"><span>Uma construção. Várias disciplinas.</span>${icon("layers")}</div><img src="${withBase("/assets/portfolio/igreja-maanaim/estrutura-3d.webp")}" alt="Modelo BIM da estrutura da Igreja Batista Maanaim, do portfólio real da RX" loading="lazy" width="1053" height="743"><div class="method-visual-caption"><span>Projeto real · Igreja Batista Maanaim</span><span>Timon / MA</span></div></div><div class="method-copy"><span class="eyebrow">Nossa forma de projetar</span><h2>Antes da obra,<br>as disciplinas conversam.</h2><p>O BIM conecta a visão espacial à informação técnica. Assim, o projeto pode ser analisado, coordenado e documentado com mais clareza.</p><ol class="method-steps">${bimProcess.map((step) => `<li><span>${step.indice}</span><div><h3>${step.titulo}</h3><p>${step.texto}</p></div></li>`).join("")}</ol></div></div></section>
 
-    ${featuredProjects.length ? `<section class="section home-projects-section"><div class="container"><div class="featured-projects-heading">${SectionTitle({ eyebrow: "Projetos prontos", title: "Modelos residenciais para comparar e adaptar", text: "Conheça plantas compactas de 50 a 85 m². Cada modelo apresenta metragem, ambientes e imagens de referência antes do contato comercial." })}<a class="button button-secondary" href="${withBase("/projetos-prontos/")}">Ver catálogo completo ${icon("arrow", "icon icon-sm")}</a></div><div class="projects-grid">${featuredProjects.map(ProjectCard).join("")}</div></div></section>` : ""}
+    ${ready.length ? `<section class="section home-projects-section"><div class="container"><div class="featured-projects-heading">${SectionTitle({ eyebrow: "Seu ponto de partida", title: "Uma casa para começar a imaginar.", text: "Conheça nossos modelos de 50 a 85 m². Compare plantas, ambientes e possibilidades de adaptação ao seu terreno." })}<a class="studio-secondary-link" href="${withBase("/projetos-prontos/")}">Explorar o catálogo ${icon("arrow", "icon icon-sm")}</a></div><div class="projects-grid">${ready.map(ProjectCard).join("")}</div></div></section>` : ""}
 
-    <section class="section section-dark why-section">
-      <div class="container split-layout">
-        <div class="editorial-image editorial-image-bim">
-          <img src="${withBase("/assets/portfolio/igreja-maanaim/modelo-estrutural.webp")}" alt="Modelo BIM da estrutura da Igreja Batista Maanaim, projeto desenvolvido pela RX" loading="lazy">
-          <span class="image-caption">Portfólio RX • Modelagem e coordenação BIM</span>
-        </div>
-        <div class="editorial-copy">
-          <span class="eyebrow">Antes de executar, organize</span>
-          <h2>Projetos e acompanhamento técnico reduzem o espaço para improvisos.</h2>
-          <p>Construir sem projeto adequado aumenta o risco de retrabalho, desperdício e incompatibilidades. A engenharia transforma informações dispersas em critérios de execução, registros e decisões verificáveis.</p>
-          <ul class="editorial-points">
-            <li><strong>Vistoria:</strong> identifica condições que nem sempre aparecem de imediato.</li>
-            <li><strong>Fiscalização:</strong> acompanha a execução e registra não conformidades.</li>
-            <li><strong>Consultoria:</strong> organiza evidências antes de decisões importantes.</li>
-          </ul>
-          <a class="button button-light" href="${withBase("/engenharia-consultiva/")}">Conhecer a engenharia consultiva ${icon("arrow", "icon icon-sm")}</a>
-        </div>
-      </div>
-    </section>
+    <section class="section home-team"><div class="container home-team-layout"><div><span class="eyebrow">Quem está por trás</span><h2>Engenharia próxima.<br>Conversa direta.</h2><p>Aristóteles Campelo e Fábio Batista Ribeiro conduzem a RX com formações complementares e atenção ao desenvolvimento de cada demanda.</p><a class="studio-secondary-link" href="${withBase("/sobre/")}">Conheça a RX ${icon("arrow", "icon icon-sm")}</a></div><div class="studio-directors">${directors.map((member) => `<article><span class="director-avatar" aria-hidden="true">${member.nome.split(" ").slice(0, 2).map((part) => part[0]).join("")}</span><div><h3>${member.nome}</h3><p>${member.funcao}</p></div>${icon("arrow", "icon icon-sm")}</article>`).join("")}<p class="team-footnote">Engenharia civil, sanitária e ambiental, com parceria técnica em Arquitetura conforme o projeto.</p></div></div></section>
 
-    <section class="section">
-      <div class="container">
-        ${SectionTitle({ eyebrow: "Como trabalhamos", title: "Clareza em cada etapa", text: "O processo é ajustado ao serviço, mantendo uma linha simples de análise, definição e entrega." })}
-        <ol class="process-grid">${homeProcess.map((step) => `<li><span>${step.index}</span><h3>${step.title}</h3><p>${step.description}</p></li>`).join("")}</ol>
-      </div>
-    </section>
-
-    <section class="section section-muted">
-      <div class="container">
-        ${SectionTitle({ eyebrow: "Por que a RX", title: "Critério técnico, comunicação direta", text: "Diferenciais objetivos para demandas que precisam de responsabilidade e documentação." })}
-        <div class="differential-grid">${homeDifferentiators.map((item) => `<article><span>${item.index}</span><h3>${item.title}</h3><p>${item.description}</p></article>`).join("")}</div>
-      </div>
-    </section>
-    ${InstagramCTA()}
-    ${FAQ(generalFaq.slice(0, 6), "Dúvidas antes de começar")}
-    ${CtaSection({ title: "Conte sua demanda. A RX ajuda a organizar o próximo passo.", text: "Envie o tipo de serviço, cidade e informações disponíveis. A equipe avaliará o enquadramento técnico inicial.", label: "Falar com a RX", message: whatsappMessages.geral, secondary: { label: "Ver todos os serviços", href: "/projetos-tecnicos/" } })}
+    ${FAQ(generalFaq.slice(0, 4), "Vamos esclarecer o primeiro passo.")}
+    ${CtaSection({ eyebrow: "Vamos conversar", title: "Seu próximo projeto começa com uma boa conversa.", text: "Conte o que você precisa, onde será o projeto e em que etapa está. Vamos organizar juntos o próximo passo.", label: "Conversar com a RX", message: whatsappMessages.geral, secondary: { label: "Ver contatos", href: "/contato/" } })}
   `;
-
-  return Layout({
-    title: "Engenharia técnica, projetos e consultoria",
-    description:
-      "Projetos de engenharia, laudos, vistorias, fiscalização, instalações e soluções sanitárias e ambientais em Teresina/PI.",
-    path: "/",
-    content,
-    bodyClass: "home-page",
-  });
+  return Layout({ title: "Arquitetura, engenharia e projetos integrados em BIM", description: "Projetos reais de arquitetura, interiores, estruturas e instalações com coordenação BIM. Conheça o portfólio e as soluções da RX Engenharia e Projetos.", path: "/", content, image: hero.imagem, bodyClass: "home-page" });
 }
 
 function technicalProjectsPage() {

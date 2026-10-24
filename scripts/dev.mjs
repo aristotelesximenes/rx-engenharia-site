@@ -2,10 +2,10 @@ import { createReadStream, existsSync, statSync } from "node:fs";
 import http from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { siteConfig } from "../src/data/site-config.js";
+import { siteConfig, outputDirectory } from "../src/data/site-config.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const dist = path.join(root, "dist");
+const dist = path.join(root, outputDirectory);
 const port = Number(process.env.PORT || 4173);
 
 const mime = {
@@ -19,6 +19,7 @@ const mime = {
   ".txt": "text/plain; charset=utf-8",
   ".webmanifest": "application/manifest+json; charset=utf-8",
   ".webp": "image/webp",
+  ".ttf": "font/ttf",
 };
 
 const server = http.createServer((request, response) => {

@@ -33,6 +33,29 @@ document.querySelectorAll("[data-current-year]").forEach((element) => {
   element.textContent = new Date().getFullYear();
 });
 
+const showcase = document.querySelector("[data-showcase]");
+if (showcase) {
+  const controls = [...showcase.querySelectorAll("[data-showcase-select]")];
+  const image = showcase.querySelector("[data-showcase-image]");
+  const title = showcase.querySelector("[data-showcase-title]");
+  const location = showcase.querySelector("[data-showcase-location]");
+  const link = showcase.querySelector("[data-showcase-link]");
+  const counter = showcase.querySelector("[data-showcase-counter]");
+  for (const control of controls) {
+    control.addEventListener("click", () => {
+      if (!image || !title || !location || !link || !counter) return;
+      image.src = control.dataset.image;
+      image.alt = control.dataset.alt;
+      image.dataset.view = control.dataset.index;
+      title.textContent = control.dataset.title;
+      location.textContent = control.dataset.location;
+      link.href = control.dataset.href;
+      counter.textContent = `${control.dataset.index.padStart(2, "0")} / ${String(controls.length).padStart(2, "0")}`;
+      controls.forEach((button) => button.setAttribute("aria-pressed", String(button === control)));
+    });
+  }
+}
+
 const filterForm = document.querySelector("[data-project-filters]");
 const projectCards = [...document.querySelectorAll("[data-project-card]")];
 const filterEmpty = document.querySelector("[data-filter-empty]");

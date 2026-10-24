@@ -3,8 +3,12 @@ export const whatsappContacts = [
   { id: "atendimento-2", label: "WhatsApp 2", number: "5586995136645", display: "(86) 99513-6645" },
 ];
 
-// Ativar após registro, verificação de propriedade e configuração do DNS.
-export const domainConfig = { name: "rxprojetosbim.eng.br", active: false };
+// Registro confirmado pelo responsável. DNS, SSL e publicação ainda precisam de verificação.
+export const domainConfig = { name: "rxprojetosbim.eng.br", registered: true, active: false, hosting: "Locaweb" };
+// Dois builds independentes preservam a prévia do GitHub durante a migração.
+export const deploymentTarget = process.env.RX_DEPLOY_TARGET === "locaweb" ? "locaweb" : "github";
+export const outputDirectory = deploymentTarget === "locaweb" ? "dist-locaweb" : "dist";
+const customDomainBuild = domainConfig.active || deploymentTarget === "locaweb";
 
 export const siteConfig = {
   name: "RX Engenharia e Projetos",
@@ -13,8 +17,8 @@ export const siteConfig = {
     "Engenharia técnica, projetos e consultoria para obras, imóveis e empreendimentos.",
   language: "pt-BR",
   locale: "pt_BR",
-  siteUrl: domainConfig.active ? `https://${domainConfig.name}` : "https://aristotelesximenes.github.io",
-  basePath: domainConfig.active ? "" : "/rx-engenharia-site",
+  siteUrl: customDomainBuild ? `https://${domainConfig.name}` : "https://aristotelesximenes.github.io",
+  basePath: customDomainBuild ? "" : "/rx-engenharia-site",
   whatsappContacts,
   whatsappNumber: whatsappContacts[0].number,
   phoneDisplay: whatsappContacts[0].display,

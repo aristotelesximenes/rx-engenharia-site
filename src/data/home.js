@@ -1,3 +1,16 @@
+export const homeShowcase = [
+  { slug: "celesc", categoria: "Arquitetura", titulo: "Complexo Celesc", local: "Santa Catarina · SC", imagem: "/assets/portfolio/celesc/fachada.webp", alt: "Perspectiva arquitetônica do complexo Celesc, projeto do portfólio da RX" },
+  { slug: "museu-tre-ac", categoria: "Interiores", titulo: "Museu do TRE-AC", local: "Rio Branco · AC", imagem: "/assets/portfolio/museu-tre-ac/modelo-expografico.webp", alt: "Modelo dos interiores e do percurso expositivo do Museu do TRE-AC" },
+  { slug: "igreja-batista-maanaim", categoria: "Estruturas", titulo: "Igreja Batista Maanaim", local: "Timon · MA", imagem: "/assets/portfolio/igreja-maanaim/modelo-estrutural.webp", alt: "Modelo estrutural BIM da Igreja Batista Maanaim desenvolvido pela RX" },
+];
+
+export const homeFocusAreas = [
+  { numero: "01", titulo: "Arquitetura e interiores", texto: "Espaços, usos e detalhes conectados à forma de viver e trabalhar.", icon: "compass", href: "/projetos-tecnicos/#arquitetura-espacos" },
+  { numero: "02", titulo: "Estruturas e instalações", texto: "Soluções técnicas coordenadas para a estrutura e as redes da edificação.", icon: "structure", href: "/projetos-tecnicos/#estruturas-instalacoes" },
+  { numero: "03", titulo: "BIM e planejamento", texto: "Modelos, compatibilização e quantitativos para decidir antes de executar.", icon: "layers", href: "/projetos-tecnicos/#bim-planejamento" },
+  { numero: "04", titulo: "Infraestrutura e ambiente", texto: "Drenagem, urbanização e engenharia sanitária e ambiental para cada contexto.", icon: "leaf", href: "/engenharia-sanitaria-e-ambiental/" },
+];
+
 export const homeAudiences = [
   {
     title: "Residencial",
