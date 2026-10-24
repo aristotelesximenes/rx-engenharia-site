@@ -90,9 +90,9 @@ function homePage() {
 
     <section class="section section-dark why-section">
       <div class="container split-layout">
-        <div class="editorial-image">
-          <img src="${withBase("/assets/engenharia-canteiro.jpeg")}" alt="Profissionais da construção civil em canteiro de obras" loading="lazy">
-          <span class="image-caption">Planejamento • Técnica • Execução</span>
+        <div class="editorial-image editorial-image-bim">
+          <img src="${withBase("/assets/portfolio/igreja-maanaim/modelo-estrutural.webp")}" alt="Modelo BIM da estrutura da Igreja Batista Maanaim, projeto desenvolvido pela RX" loading="lazy">
+          <span class="image-caption">Portfólio RX • Modelagem e coordenação BIM</span>
         </div>
         <div class="editorial-copy">
           <span class="eyebrow">Antes de executar, organize</span>
@@ -290,9 +290,10 @@ function contactPage() {
       <div class="contact-aside">
         <span class="eyebrow">Atendimento técnico</span><h2>Informações que ajudam na análise</h2>
         ${CheckList(["Tipo de serviço desejado", "Cidade/UF da obra ou imóvel", "Estágio atual da demanda", "Objetivo e prazo esperado", "Fotos ou documentos disponíveis"]) }
-        <div class="direct-contact"><a href="${whatsappUrl(whatsappMessages.geral)}" target="_blank" rel="noopener">${icon("whatsapp")}<span><small>WhatsApp</small>${siteConfig.phoneDisplay}</span></a><a href="mailto:${siteConfig.email}">${icon("mail")}<span><small>E-mail</small>${siteConfig.email}</span></a><p>${icon("pin")}<span><small>Base de atendimento</small>${siteConfig.city}</span></p></div>
+        <div class="direct-contact">${siteConfig.whatsappContacts.map((contact) => `<a href="${whatsappUrl(whatsappMessages.geral, contact.number)}" target="_blank" rel="noopener">${icon("whatsapp")}<span><small>${contact.label}</small>${contact.display}</span></a>`).join("")}<a href="mailto:${siteConfig.email}">${icon("mail")}<span><small>E-mail</small>${siteConfig.email}</span></a><p>${icon("pin")}<span><small>Base de atendimento</small>${siteConfig.city}</span></p></div>
       </div>
       <form class="contact-form" data-contact-form>
+        <div><label for="canal">Canal de atendimento</label><select id="canal" name="canal" required>${siteConfig.whatsappContacts.map((contact) => `<option value="${contact.number}">${contact.label} · ${contact.display}</option>`).join("")}</select></div>
         <div class="form-grid"><div><label for="nome">Nome</label><input id="nome" name="nome" autocomplete="name" required></div><div><label for="whatsapp">WhatsApp</label><input id="whatsapp" name="whatsapp" inputmode="tel" autocomplete="tel" required></div></div>
         <div class="form-grid"><div><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email"></div><div><label for="cidade">Cidade/UF</label><input id="cidade" name="cidade" autocomplete="address-level2" required></div></div>
         <div><label for="servico">Tipo de serviço</label><select id="servico" name="servico" required><option value="">Selecione</option><option>Projeto técnico</option><option>Projeto pronto</option><option>Projeto personalizado</option><option>Laudo ou vistoria</option><option>Fiscalização ou gerenciamento de obra</option><option>Instalações</option><option>Engenharia sanitária e ambiental</option><option>Consultoria técnica</option><option>Outro</option></select></div>

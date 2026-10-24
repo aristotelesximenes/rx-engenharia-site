@@ -1876,6 +1876,9 @@ p {
   color: #c3c7ca;
 }
 
+.editorial-image-bim { background: #e7e5e2; }
+.editorial-image-bim img { object-fit: contain; }
+
 /* Portfólio de projetos reais */
 .portfolio-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .portfolio-grid-featured { grid-template-columns: repeat(3, minmax(0, 1fr)); }

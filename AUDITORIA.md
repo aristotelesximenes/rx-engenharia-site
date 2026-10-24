@@ -87,3 +87,13 @@ Gerador estático em Node.js, sem dependências externas, com dados em `src/data
 - nomes de instituições mantidos conforme autorização do usuário; registros profissionais, endereços precisos e documentos integrais não foram incorporados;
 - descrições preservam a distinção entre projeto desenvolvido e obra executada.
 - geração de 24 páginas HTML validada; cinco filtros do portfólio, cinco galerias e 13 especialidades testados em navegador, nas larguras de 1440 e 390 pixels, sem erros de execução ou rolagem lateral.
+
+## Ajustes de identidade, contato e atendimento — 24/10/2026
+
+- imagem de campanha do Dia do Trabalhador removida dos assets e substituída na home por modelo BIM real do portfólio;
+- contatos atualizados para (86) 98817-1719 e (86) 99513-6645, com ambos no rodapé/contato e seleção de canal no formulário;
+- dados estruturados e verificação de links atualizados para reconhecer somente os dois canais cadastrados;
+- domínio futuro `rxprojetosbim.eng.br` preparado em configuração central, sem ativação antes do registro e do DNS;
+- assistente de WhatsApp implementado em serviço separado, com dois canais, menu de serviços, coleta de solicitação e pausa para equipe;
+- 12 testes locais do assistente aprovados, incluindo verificação do webhook, deduplicação, separação entre números e falha de envio;
+- ativação real do assistente pendente: ambos os números usam Business, mas o responsável informou ainda não ter acesso administrativo à conta empresarial da Meta; hospedagem e credenciais também precisam ser configuradas.

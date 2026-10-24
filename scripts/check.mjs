@@ -30,12 +30,13 @@ async function walk(directory) {
 const files = await walk(dist);
 const htmlFiles = files.filter((file) => file.endsWith(".html"));
 const errors = [];
-const forbiddenExtensions = /\.(pdf|docx?|xlsx?|dwg|dxf|rvt|rfa|zip|rar)$/i;
+const forbiddenExtensions = /\.(pdf|docx?|xlsx?|dwg|dxf|rvt|rfa|zip|rar|sqlite(?:-\w+)?)$/i;
 
 for (const file of files) {
   if (forbiddenExtensions.test(file)) {
     errors.push(`Arquivo técnico/sensível na saída: ${path.relative(dist, file)}`);
   }
+  if (/^\.env(?:\.|$)/i.test(path.basename(file))) errors.push(`Arquivo de ambiente na saída: ${path.relative(dist,file)}`);
 }
 
 for (const file of htmlFiles) {
@@ -72,8 +73,8 @@ for (const file of htmlFiles) {
 const allHtml = (await Promise.all(htmlFiles.map((file) => readFile(file, "utf8")))).join("\n");
 const unexpectedNumbers = [...allHtml.matchAll(/wa\.me\/(\d+)/g)]
   .map((match) => match[1])
-  .filter((number) => number !== siteConfig.whatsappNumber);
-if (unexpectedNumbers.length) errors.push("Há mais de um número de WhatsApp na saída.");
+  .filter((number) => !siteConfig.whatsappContacts.some((contact) => contact.number === number));
+if (unexpectedNumbers.length) errors.push("Há um número de WhatsApp não cadastrado na saída.");
 
 if (errors.length) {
   console.error(`Falhas encontradas (${errors.length}):`);

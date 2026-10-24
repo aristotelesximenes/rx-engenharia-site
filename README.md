@@ -1,6 +1,6 @@
 # Site RX Engenharia e Projetos
 
-Site institucional e comercial estático, responsivo e sem backend. O build usa apenas Node.js e gera arquivos prontos para Cloudflare Pages, Vercel ou GitHub Pages.
+Site institucional e comercial estático e responsivo. O build usa apenas Node.js e gera arquivos prontos para Cloudflare Pages, Vercel ou GitHub Pages. O assistente opcional de WhatsApp é um serviço separado, em `automation/whatsapp/`, e não é hospedado pelo GitHub Pages.
 
 ## Rodar localmente
 
@@ -44,8 +44,7 @@ Os textos de público, processo e diferenciais da página inicial ficam em `src/
 Edite `src/data/site-config.js` para alterar:
 
 - nome da empresa;
-- número único de WhatsApp (DDI + DDD + número, somente dígitos);
-- telefone exibido;
+- lista `whatsappContacts` com os dois canais de WhatsApp (número e apresentação);
 - e-mail;
 - cidade;
 - Instagram;
@@ -67,7 +66,11 @@ Em domínio próprio, Cloudflare Pages ou Vercel, mantenha `basePath: ""`.
 
 ## WhatsApp
 
-As mensagens ficam em `src/data/whatsapp-messages.js`. O número não deve ser repetido em outros arquivos: links e formulário leem `siteConfig.whatsappNumber`.
+As mensagens ficam em `src/data/whatsapp-messages.js`. A lista dos dois canais é centralizada em `whatsappContacts`, exportada por `src/data/site-config.js`. Os botões principais usam o primeiro canal; o rodapé mostra ambos e o formulário permite escolher a linha. O verificador rejeita números que não estejam cadastrados.
+
+O robô dos dois canais está programado e tem testes locais, mas aguarda conexão à Meta e hospedagem para ativação. Consulte `automation/whatsapp/README.md`. Credenciais e banco de atendimento nunca entram na área pública do site.
+
+O domínio planejado é `rxprojetosbim.eng.br`, mantido com `domainConfig.active: false` até a compra e a configuração do DNS. A sequência de ativação está em `docs/DOMINIO.md`.
 
 Para criar uma nova mensagem:
 

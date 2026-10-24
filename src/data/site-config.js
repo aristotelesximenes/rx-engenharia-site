@@ -1,3 +1,11 @@
+export const whatsappContacts = [
+  { id: "atendimento-1", label: "WhatsApp 1", number: "5586988171719", display: "(86) 98817-1719" },
+  { id: "atendimento-2", label: "WhatsApp 2", number: "5586995136645", display: "(86) 99513-6645" },
+];
+
+// Ativar após registro, verificação de propriedade e configuração do DNS.
+export const domainConfig = { name: "rxprojetosbim.eng.br", active: false };
+
 export const siteConfig = {
   name: "RX Engenharia e Projetos",
   shortName: "RX Engenharia",
@@ -5,10 +13,11 @@ export const siteConfig = {
     "Engenharia técnica, projetos e consultoria para obras, imóveis e empreendimentos.",
   language: "pt-BR",
   locale: "pt_BR",
-  siteUrl: "https://aristotelesximenes.github.io",
-  basePath: "/rx-engenharia-site",
-  whatsappNumber: "5586994086451",
-  phoneDisplay: "(86) 99408-6451",
+  siteUrl: domainConfig.active ? `https://${domainConfig.name}` : "https://aristotelesximenes.github.io",
+  basePath: domainConfig.active ? "" : "/rx-engenharia-site",
+  whatsappContacts,
+  whatsappNumber: whatsappContacts[0].number,
+  phoneDisplay: whatsappContacts[0].display,
   email: "rxprojetoseng@gmail.com",
   city: "Teresina/PI",
   instagram: {

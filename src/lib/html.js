@@ -14,8 +14,11 @@ export function linkTo(path) {
   return withBase(path);
 }
 
-export function whatsappUrl(message) {
-  return `https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(message)}`;
+export function whatsappUrl(message, number = siteConfig.whatsappNumber) {
+  if (!siteConfig.whatsappContacts.some((contact) => contact.number === number)) {
+    throw new Error("Canal de WhatsApp não cadastrado.");
+  }
+  return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 }
 
 export function metaTags({ title, description, path = "/", image = "" }) {

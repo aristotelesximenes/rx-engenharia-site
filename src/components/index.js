@@ -85,7 +85,7 @@ export function Footer() {
       <div>
         <h2>Contato</h2>
         <ul class="contact-list">
-          <li>${icon("whatsapp")}<a href="${whatsappUrl(whatsappMessages.geral)}" target="_blank" rel="noopener">${siteConfig.phoneDisplay}</a></li>
+          ${siteConfig.whatsappContacts.map((contact) => `<li>${icon("whatsapp")}<a href="${whatsappUrl(whatsappMessages.geral, contact.number)}" target="_blank" rel="noopener">${contact.display}</a></li>`).join("")}
           <li>${icon("mail")}<a href="mailto:${siteConfig.email}">${siteConfig.email}</a></li>
           <li>${icon("pin")}<span>${siteConfig.city}</span></li>
           <li>${icon("instagram")}<a href="${siteConfig.instagram.url}" target="_blank" rel="noopener">${siteConfig.instagram.handle}</a></li>
@@ -114,7 +114,8 @@ export function Layout({
     description: siteConfig.description,
     ...(siteConfig.siteUrl ? { url: siteConfig.siteUrl } : {}),
     ...(siteConfig.siteUrl ? { logo: absoluteUrl(siteConfig.logo) } : {}),
-    telephone: `+${siteConfig.whatsappNumber}`,
+    telephone: siteConfig.whatsappContacts.map((contact) => `+${contact.number}`),
+    contactPoint: siteConfig.whatsappContacts.map((contact) => ({ "@type": "ContactPoint", telephone: `+${contact.number}`, contactType: "customer service", availableLanguage: "Portuguese" })),
     email: siteConfig.email,
     areaServed: siteConfig.serviceArea,
     sameAs: [siteConfig.instagram.url],
@@ -132,7 +133,7 @@ export function Layout({
   <link rel="stylesheet" href="${withBase("/assets/site.css")}">
   <script type="module" src="${withBase("/assets/main.js")}" defer></script>
 </head>
-<body class="${bodyClass}" data-page="${escapeHtml(path)}" data-whatsapp="${siteConfig.whatsappNumber}">
+<body class="${bodyClass}" data-page="${escapeHtml(path)}" data-whatsapp="${siteConfig.whatsappNumber}" data-whatsapp-allowed="${siteConfig.whatsappContacts.map((contact) => contact.number).join(" ")}">
   ${Header(path)}
   <main id="conteudo">${content}</main>
   ${Footer()}

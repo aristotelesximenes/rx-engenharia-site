@@ -7,7 +7,9 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "dev": "node scripts/build.mjs && node scripts/dev.mjs",
-    "check": "node scripts/check.mjs"
+    "check": "node scripts/check.mjs",
+    "bot:test": "node --test automation/whatsapp/bot.test.mjs",
+    "bot:start": "node --env-file=automation/whatsapp/.env automation/whatsapp/server.mjs"
   },
   "engines": {
     "node": ">=20"

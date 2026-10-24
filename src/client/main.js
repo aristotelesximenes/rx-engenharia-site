@@ -107,7 +107,9 @@ if (contactForm) {
   contactForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const data = new FormData(contactForm);
-    const number = document.body.dataset.whatsapp;
+    const allowedNumbers = (document.body.dataset.whatsappAllowed || "").split(" ");
+    const selectedNumber = String(data.get("canal") || "");
+    const number = allowedNumbers.includes(selectedNumber) ? selectedNumber : document.body.dataset.whatsapp;
     const message = [
       "Olá, vim pelo site da RX Engenharia e Projetos.",
       "",
