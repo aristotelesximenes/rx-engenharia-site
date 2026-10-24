@@ -3,12 +3,12 @@ export const whatsappContacts = [
   { id: "atendimento-2", label: "WhatsApp 2", number: "5586995136645", display: "(86) 99513-6645" },
 ];
 
-// Registro confirmado pelo responsável. DNS, SSL e publicação ainda precisam de verificação.
-export const domainConfig = { name: "rxprojetosbim.eng.br", registered: true, active: false, hosting: "Locaweb" };
+// Registro, DNS, HTTPS e publicação conferidos em 24/10/2026.
+export const domainConfig = { name: "rxprojetosbim.eng.br", registered: true, active: true, hosting: "Locaweb" };
 // Dois builds independentes preservam a prévia do GitHub durante a migração.
 export const deploymentTarget = process.env.RX_DEPLOY_TARGET === "locaweb" ? "locaweb" : "github";
 export const outputDirectory = deploymentTarget === "locaweb" ? "dist-locaweb" : "dist";
-const customDomainBuild = domainConfig.active || deploymentTarget === "locaweb";
+const customDomainBuild = deploymentTarget === "locaweb";
 
 export const siteConfig = {
   name: "RX Engenharia e Projetos",

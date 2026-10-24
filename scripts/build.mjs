@@ -1,4 +1,5 @@
 import { access, cp, mkdir, rm, writeFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { Layout } from "../src/components/index.js";
@@ -24,7 +25,10 @@ async function writeRoute(route, html) {
 await rm(dist, { recursive: true, force: true });
 await mkdir(path.join(dist, "assets"), { recursive: true });
 
-await cp(path.join(root, "public"), dist, { recursive: true });
+await cp(path.join(root, "public"), dist, {
+  recursive: true,
+  filter: (source) => !(source.includes(`${path.sep}assets${path.sep}projetos${path.sep}`) && /\.(jpe?g|png)$/i.test(source) && existsSync(source.replace(/\.(jpe?g|png)$/i, ".webp"))),
+});
 await cp(path.join(root, "src", "styles", "site.css"), path.join(dist, "assets", "site.css"));
 await cp(path.join(root, "src", "styles", "modern.css"), path.join(dist, "assets", "modern.css"));
 await cp(path.join(root, "src", "client", "main.js"), path.join(dist, "assets", "main.js"));

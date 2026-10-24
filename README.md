@@ -44,6 +44,8 @@ Os textos de público, processo e diferenciais da página inicial ficam em `src/
 
 A interface editorial usa superfícies claras, neutros naturais, acentos laranja RX e projetos reais. `src/styles/site.css` mantém a base de componentes; `src/styles/modern.css`, carregado depois, define a identidade atual e seus ajustes responsivos. A fonte variável Manrope é hospedada localmente em `public/assets/fonts/`, acompanhada da licença SIL OFL.
 
+As 15 imagens comerciais das casas usam versões WebP otimizadas (cerca de 2,1 MB em vez de 15,4 MB). Os originais JPG/PNG permanecem preservados no repositório, mas o build omite esses originais quando existe uma versão WebP correspondente, evitando duplicação no pacote público.
+
 `homeShowcase` define os três projetos selecionáveis da primeira tela; `homeFocusAreas` organiza as quatro áreas de atuação. A seleção é manual, com botões acessíveis e sem rotação automática. O conteúdo mantém a distinção entre projeto elaborado e obra executada.
 
 ## Configuração principal

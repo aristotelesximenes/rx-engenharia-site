@@ -24,9 +24,9 @@ export const projects = [
     descricaoCompleta:
       "Solução residencial térrea voltada a quem busca uma implantação compacta e funcional. O modelo organiza dois quartos, sala de estar, sala de jantar, cozinha americana, varanda, banheiro e área de serviço em 50 m² de área construída.",
     imagens: [
-      "/assets/projetos/casa-50/fachada-conjunto.jpg",
-      "/assets/projetos/casa-50/planta-humanizada.jpg",
-      "/assets/projetos/casa-50/visao-interna.png",
+      "/assets/projetos/casa-50/fachada-conjunto.webp",
+      "/assets/projetos/casa-50/planta-humanizada.webp",
+      "/assets/projetos/casa-50/visao-interna.webp",
     ],
     legendasImagens: [
       "Estudo de implantação com unidades do modelo de 50 m²",
@@ -78,9 +78,9 @@ export const projects = [
     descricaoCompleta:
       "Modelo residencial térreo com 60 m² de área construída. A distribuição contempla dois quartos, sala de estar, sala de jantar, cozinha americana, varanda, banheiro e área de serviço, mantendo uma organização direta e adequada a terrenos que serão avaliados previamente.",
     imagens: [
-      "/assets/projetos/casa-60/fachada.jpg",
-      "/assets/projetos/casa-60/planta-humanizada.png",
-      "/assets/projetos/casa-60/visao-interna.png",
+      "/assets/projetos/casa-60/fachada.webp",
+      "/assets/projetos/casa-60/planta-humanizada.webp",
+      "/assets/projetos/casa-60/visao-interna.webp",
     ],
     legendasImagens: [
       "Opção de fachada contemporânea para o modelo de 60 m²",
@@ -132,9 +132,9 @@ export const projects = [
     descricaoCompleta:
       "Versão térrea de 70 m² com dois quartos e dois banheiros. O programa também reúne sala de estar, sala de jantar, cozinha americana, varanda e área de serviço, com fachada de composição contemporânea disponível como referência comercial.",
     imagens: [
-      "/assets/projetos/casa-70-modelo-01/fachada-moderna.png",
-      "/assets/projetos/casa-70-modelo-01/planta-humanizada.png",
-      "/assets/projetos/casa-70-modelo-01/visao-interna.png",
+      "/assets/projetos/casa-70-modelo-01/fachada-moderna.webp",
+      "/assets/projetos/casa-70-modelo-01/planta-humanizada.webp",
+      "/assets/projetos/casa-70-modelo-01/visao-interna.webp",
     ],
     legendasImagens: [
       "Fachada contemporânea do modelo de 70 m² com dois quartos",
@@ -186,9 +186,9 @@ export const projects = [
     descricaoCompleta:
       "Segundo modelo residencial de 70 m², configurado com três quartos e dois banheiros. A planta inclui sala de estar, sala de jantar, cozinha americana, varanda e área de serviço, oferecendo uma alternativa com maior número de dormitórios na mesma faixa de área construída.",
     imagens: [
-      "/assets/projetos/casa-70-modelo-02/fachada.jpg",
-      "/assets/projetos/casa-70-modelo-02/planta-humanizada.png",
-      "/assets/projetos/casa-70-modelo-02/visao-interna.png",
+      "/assets/projetos/casa-70-modelo-02/fachada.webp",
+      "/assets/projetos/casa-70-modelo-02/planta-humanizada.webp",
+      "/assets/projetos/casa-70-modelo-02/visao-interna.webp",
     ],
     legendasImagens: [
       "Opção de fachada para o modelo de 70 m² com três quartos",
@@ -240,9 +240,9 @@ export const projects = [
     descricaoCompleta:
       "Modelo de maior área do catálogo, com 85 m² e distribuição térrea. O programa contempla três quartos, dois banheiros, sala de estar, sala de jantar, cozinha americana, varanda e área de serviço, acompanhado por estudo de fachada contemporânea.",
     imagens: [
-      "/assets/projetos/casa-85/fachada-noturna.png",
-      "/assets/projetos/casa-85/planta-humanizada.png",
-      "/assets/projetos/casa-85/visao-interna.png",
+      "/assets/projetos/casa-85/fachada-noturna.webp",
+      "/assets/projetos/casa-85/planta-humanizada.webp",
+      "/assets/projetos/casa-85/visao-interna.webp",
     ],
     legendasImagens: [
       "Estudo de fachada contemporânea do modelo de 85 m²",

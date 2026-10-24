@@ -1,6 +1,8 @@
 # Domínio registrado: rxprojetosbim.eng.br
 
-Em 24/10/2026 o responsável confirmou o registro do domínio e a contratação de Hospedagem GO Linux na Locaweb. O painel foi conferido e apresenta a hospedagem como **Ativo**. Isso não confirma, por si só, publicação dos arquivos, propagação do DNS ou emissão do certificado HTTPS.
+Publicado e verificado em 24/10/2026: **https://rxprojetosbim.eng.br/**, na Hospedagem GO Linux da Locaweb. O domínio raiz e `www` respondem por HTTPS. As páginas usam canonical no domínio raiz; nenhum registro de e-mail ou DNS foi alterado.
+
+A publicação contém 74 arquivos: 73 arquivos públicos comparados byte a byte com o pacote local, mais `.htaccess`, protegido por HTTP 403. A raiz, o portfólio e o contato respondem com 200; páginas inexistentes e caminhos privados testados retornam 404. O envio foi concluído por FTP com autorização expressa do responsável, após instabilidade do WebFTP. A senha não foi salva em arquivos; recomenda-se trocá-la após a publicação.
 
 `src/data/site-config.js` centraliza o domínio. `registered: true` registra a confirmação do usuário. O build `RX_DEPLOY_TARGET=locaweb` gera URLs na raiz do domínio, sem alterar o build padrão de prévia do GitHub.
 
@@ -17,7 +19,7 @@ O `.htaccess` do pacote configura `index.html`, página 404, MIME de WebP/fontes
 
 ## Prévia independente no GitHub Pages
 
-O build padrão continua gerando `dist/` para o link existente do GitHub, com `/rx-engenharia-site`. Isso evita quebrar a prévia durante a migração. O workflow atual não envia arquivos à Locaweb; novas alterações precisam gerar e publicar o pacote próprio lá também. `domainConfig.active` só deve mudar após validar produção e redefinir conscientemente o destino do build padrão.
+O build padrão continua gerando `dist/` para o link existente do GitHub, com `/rx-engenharia-site`. Isso mantém a prévia independente da produção. O workflow atual não envia arquivos à Locaweb; novas alterações precisam gerar e publicar o pacote próprio lá também. `domainConfig.active` registra a confirmação de produção, mas não altera o destino do build: somente `RX_DEPLOY_TARGET=locaweb` seleciona o pacote Locaweb.
 
 O assistente de WhatsApp é um serviço separado, ainda pendente de configuração oficial da Meta e hospedagem compatível. Ele não faz parte dos arquivos públicos do site.
 

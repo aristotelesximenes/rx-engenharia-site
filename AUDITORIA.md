@@ -108,4 +108,10 @@ Gerador estático em Node.js, sem dependências externas, com dados em `src/data
 - registro do domínio confirmado pelo usuário; hospedagem GO Linux conferida como Ativo no painel;
 - DNS público conferido: domínio raiz apontando ao mesmo IP exibido na hospedagem e `www` apontando ao domínio raiz; nenhum registro DNS foi alterado;
 - HTTPS responde, mas a raiz ainda retorna 403 antes da publicação dos arquivos; isso não foi tratado como site publicado;
-- WebFTP acessível, com autenticação pendente do responsável. Credenciais não foram salvas no código ou no pacote.
+- autenticação WebFTP concluída; após instabilidade do gerenciador, o responsável autorizou o envio direto por FTP, ciente da ausência de criptografia desse serviço;
+- 74 arquivos publicados na pasta pública; 73 arquivos comparados byte a byte via HTTPS, sem divergências, e `.htaccess` protegido por 403;
+- raiz, portfólio, contato e `www` respondendo por HTTPS; caminhos privados verificados como não acessíveis e página inexistente com 404;
+- 25 arquivos comerciais temporários da etapa WebFTP movidos para pasta privada em `tmp/`, sem exclusão de dados ou alteração de arquivos preexistentes do usuário;
+- 15 imagens do catálogo convertidas para WebP: cerca de 15,4 MB reduzidos a 2,1 MB, preservando os originais; o build evita publicar versões duplicadas;
+- vitrine manual, menu móvel e ausência de rolagem lateral conferidos em produção; interface revisada em 1440, 390 e 320 pixels;
+- credenciais não salvas no código, no repositório ou no pacote. Robô de WhatsApp permanece separado e não foi ativado por esta publicação.
