@@ -115,3 +115,4 @@ Gerador estático em Node.js, sem dependências externas, com dados em `src/data
 - 15 imagens do catálogo convertidas para WebP: cerca de 15,4 MB reduzidos a 2,1 MB, preservando os originais; o build evita publicar versões duplicadas;
 - vitrine manual, menu móvel e ausência de rolagem lateral conferidos em produção; interface revisada em 1440, 390 e 320 pixels;
 - credenciais não salvas no código, no repositório ou no pacote. Robô de WhatsApp permanece separado e não foi ativado por esta publicação.
+- versões de CSS e JavaScript calculadas pelo conteúdo para invalidar cache antigo após novas publicações.

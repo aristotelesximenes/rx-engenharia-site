@@ -1,3 +1,5 @@
+import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
 import { navigation } from "../data/navigation.js";
 import { absoluteUrl, siteConfig, withBase } from "../data/site-config.js";
 import { whatsappMessages } from "../data/whatsapp-messages.js";
@@ -9,6 +11,16 @@ import {
   metaTags,
   whatsappUrl,
 } from "../lib/html.js";
+
+const assetVersions = Object.fromEntries([
+  ["site.css", "../styles/site.css"],
+  ["modern.css", "../styles/modern.css"],
+  ["main.js", "../client/main.js"],
+].map(([name, source]) => [name, createHash("sha256").update(readFileSync(new URL(source, import.meta.url))).digest("hex").slice(0, 12)]));
+
+function assetUrl(name) {
+  return `${withBase(`/assets/${name}`)}?v=${assetVersions[name]}`;
+}
 
 function isCurrent(path, href) {
   const cleanHref = href.split("#")[0];
@@ -131,9 +143,9 @@ export function Layout({
   ${jsonLd(businessSchema)}
   <link rel="preload" href="${withBase("/assets/fonts/Manrope-Variable.ttf")}" as="font" type="font/ttf" crossorigin>
   <link rel="icon" href="${withBase(siteConfig.logo)}">
-  <link rel="stylesheet" href="${withBase("/assets/site.css")}">
-  <link rel="stylesheet" href="${withBase("/assets/modern.css")}">
-  <script type="module" src="${withBase("/assets/main.js")}" defer></script>
+  <link rel="stylesheet" href="${assetUrl("site.css")}">
+  <link rel="stylesheet" href="${assetUrl("modern.css")}">
+  <script type="module" src="${assetUrl("main.js")}" defer></script>
 </head>
 <body class="modern-site ${bodyClass}" data-page="${escapeHtml(path)}" data-whatsapp="${siteConfig.whatsappNumber}" data-whatsapp-allowed="${siteConfig.whatsappContacts.map((contact) => contact.number).join(" ")}">
   ${Header(path)}
