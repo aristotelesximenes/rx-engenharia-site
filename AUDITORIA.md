@@ -116,3 +116,14 @@ Gerador estático em Node.js, sem dependências externas, com dados em `src/data
 - vitrine manual, menu móvel e ausência de rolagem lateral conferidos em produção; interface revisada em 1440, 390 e 320 pixels;
 - credenciais não salvas no código, no repositório ou no pacote. Robô de WhatsApp permanece separado e não foi ativado por esta publicação.
 - versões de CSS e JavaScript calculadas pelo conteúdo para invalidar cache antigo após novas publicações.
+
+## E-mail profissional de atendimento — 24/10/2026
+
+- domínio adicionado ao serviço de e-mail da Locaweb, com configuração automática dos registros; MX e SPF públicos conferidos;
+- caixa `atendimento@rxprojetosbim.eng.br` criada pelo responsável e confirmada na listagem de caixas postais, com 3 GB;
+- contato público atualizado na configuração central e publicado no contato, rodapé e dados estruturados das 24 páginas;
+- verificação automatizada dos links de e-mail incluída nos dois builds; 73 arquivos públicos comparados por HTTPS sem divergências;
+- não foi realizado teste de envio/recebimento dentro da caixa postal;
+- plano atual permite uma caixa. Fábio e Aristóteles permanecem pendentes de capacidade e definição de senhas pelo responsável;
+- painel apresentou pacote de 10 caixas adicionais por R$ 372,00/ano; nenhuma contratação foi realizada e nenhum apelido foi criado como substituto das caixas independentes;
+- senhas de e-mail não foram solicitadas pelo chat nem armazenadas no projeto.

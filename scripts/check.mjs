@@ -50,6 +50,9 @@ for (const file of htmlFiles) {
   if (h1Count !== 1) errors.push(`${relative}: deve conter exatamente um h1 (encontrados: ${h1Count})`);
   if (/INSERIR_|>A DEFINIR<|\bCPF\b|ASSINATURA:/i.test(html)) errors.push(`${relative}: placeholder ou dado indevido exposto`);
   if (/target="_blank"(?![^>]*rel="[^"]*noopener)/g.test(html)) errors.push(`${relative}: link externo sem rel=noopener`);
+  const emailLinks = [...html.matchAll(/href="mailto:([^"?]+)(?:\?[^"]*)?"/g)].map((match) => match[1]);
+  if (!emailLinks.includes(siteConfig.email)) errors.push(`${relative}: contato por e-mail ausente`);
+  if (emailLinks.some((email) => email !== siteConfig.email)) errors.push(`${relative}: contato por e-mail fora da configuração central`);
 
   const links = [...html.matchAll(/(?:href|src)="([^"]+)"/g)].map((match) => match[1]);
   for (const link of links) {

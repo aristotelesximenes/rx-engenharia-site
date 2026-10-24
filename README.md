@@ -166,6 +166,8 @@ Cada página em `src/pages/pages.js` informa `title`, `description` e `path`. O 
 
 O mesmo componente também gera dados estruturados `ProfessionalService` a partir de `siteConfig`. Nome, telefone, e-mail, área de atendimento e Instagram não devem ser repetidos manualmente nas páginas.
 
+O contato público é `atendimento@rxprojetosbim.eng.br`, com caixa criada no painel da Locaweb. Altere esse endereço somente em `src/data/site-config.js`: rodapé, contato e dados estruturados compartilham a configuração. A verificação exige o mesmo endereço em todos os links de e-mail. As caixas pessoais dos diretores não devem ser apresentadas como ativas antes de sua criação; o plano GO atual inclui apenas uma caixa de 3 GB.
+
 Ao criar uma página:
 
 1. use uma URL curta e descritiva;

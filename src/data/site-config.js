@@ -22,7 +22,7 @@ export const siteConfig = {
   whatsappContacts,
   whatsappNumber: whatsappContacts[0].number,
   phoneDisplay: whatsappContacts[0].display,
-  email: "rxprojetoseng@gmail.com",
+  email: "atendimento@rxprojetosbim.eng.br",
   city: "Teresina/PI",
   instagram: {
     handle: "@rxengproj",
